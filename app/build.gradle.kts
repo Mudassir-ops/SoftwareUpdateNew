@@ -13,7 +13,7 @@ android {
     compileSdk = 34
 
     defaultConfig {
-        applicationId = "com.example.softwareupdate"
+        applicationId = "ehtechapp.softwareupdate.supdate"
         minSdk = 23
         targetSdk = 34
         versionCode = 1
@@ -85,7 +85,7 @@ dependencies {
     implementation("com.karumi:dexter:6.2.3")
 
     /** ads dependency */
-    implementation("com.google.android.gms:play-services-ads:22.6.0")
+//    implementation("com.google.android.gms:play-services-ads:22.6.0")
     implementation("com.google.code.gson:gson:2.10")
     implementation("com.github.PhilJay:MPAndroidChart:v3.1.0")
 

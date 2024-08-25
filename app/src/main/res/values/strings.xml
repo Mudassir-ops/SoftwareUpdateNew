@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Update Software</string>
+    <string name="app_name">Phone Update - Software Update</string>
     <string name="no_launcher">No Launcher</string>
     <string name="software_update_app">Software Update App</string>
     <string name="view_more">View Apps</string>
@@ -96,11 +96,8 @@
         <item>Average Risk Apps</item>
         <item>Low Risk Apps</item>
     </string-array>
-    <string name="app_id" translatable="false">ca-app-pub-3940256099942544~3347511713</string>
-    <string name="interstitial_id" translatable="false">ca-app-pub-3940256099942544/1033173712</string>
-    <string name="native_id" translatable="false">ca-app-pub-3940256099942544/2247696110</string>
-    <string name="privacy_policy_link" translatable="false" />
-    <string name="more_app_link" translatable="false" />
+    <string name="privacy_policy_link" translatable="false">https://atonomushubofficial.blogspot.com/2024/08/privacy-policy.html</string>
+    <string name="more_app_link" translatable="false">https://play.google.com/store/apps/dev?id=7068253360089619762</string>
     <string name="version_1_detail" translatable="false">"<b><span style='font-size:18sp;'>Overview</span></b>\n\nAndroid made its official public debut in 2008 with Android 1.0, marking the beginning of the Android operating system. This initial release lacked a cute codename."
                         "\n\nAndroid 1.1 (API 2):\n\nReleased on February 9, 2009, the Android 1.1 update, internally known as \"Petit Four,\" was initially available for the HTC Dream. This update addressed bugs, made changes to the Android API, and introduced new features, laying the foundation for the evolution of the Android platform.\n\n<b><span style='font-size:18sp;'>Detail</span></b>\n\nThis Android version introduced several notable features. The Android Market facilitated application downloads and updates, while the web browser allowed the viewing of full HTML and XHTML web pages through multiple windows. Camera support was present, but customization options were limited. Folders were introduced for organizing app icons on the Home screen."
                         "Email services included access to web servers and synchronization with Gmail, Google Contacts, and Google Calendar. Google Maps with Street View provided map and satellite imagery, while Google Sync managed over-the-air synchronization. The device supported Wi-Fi and Bluetooth, and the media player allowed management and playback of media files, excluding video and stereo Bluetooth support."
@@ -110,7 +107,6 @@
     <string name="no_internet">No Internet</string>
     <string name="coming_soon">Coming Soon</string>
     <string name="no_match_found">No match found</string>
-    <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="device_info">Device Info</string>
     <string name="name">Name</string>

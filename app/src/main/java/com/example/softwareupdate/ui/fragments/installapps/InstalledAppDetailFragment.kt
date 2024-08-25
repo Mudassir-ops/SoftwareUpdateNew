@@ -11,13 +11,10 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.example.softwareupdate.adapters.allapps.AllAppsEntity
-import com.example.softwareupdate.ads.loadNativeAd
-import com.example.softwareupdate.ads.populateNativeAdView
-import com.example.softwareupdate.databinding.CustomNativeViewBinding
 import com.example.softwareupdate.databinding.FragmentInstalledAppDetailBinding
 import com.example.softwareupdate.utils.AppConstants
 import com.example.softwareupdate.utils.getPackageInfoCompat
-import com.example.softwareupdate.utils.isAddedAndNotDetached
+
 import com.example.softwareupdate.utils.launchOtherApp
 import com.example.softwareupdate.utils.openPlayStoreForApp
 import com.example.softwareupdate.utils.parcelable
@@ -64,14 +61,7 @@ class InstalledAppDetailFragment : Fragment() {
             btnViewOnStore.setOnClickListener {
                 allAppsEntity?.pName?.let { it1 -> context.openPlayStoreForApp(packageName = it1) }
             }
-            activity?.loadNativeAd { nativeAdLambda ->
-                if (this@InstalledAppDetailFragment.isAddedAndNotDetached()) {
-                    val adBinding = CustomNativeViewBinding.inflate(layoutInflater)
-                    nativeAdLambda?.let { populateNativeAdView(it, adBinding) }
-                    nativeAd.removeAllViews()
-                    nativeAd.addView(adBinding.root)
-                }
-            }
+
             checkAppSensitivity(packName = allAppsEntity?.pName ?: return@apply)
             btnShare.setOnClickListener {
                 context?.shareApp(allAppsEntity ?: return@setOnClickListener)

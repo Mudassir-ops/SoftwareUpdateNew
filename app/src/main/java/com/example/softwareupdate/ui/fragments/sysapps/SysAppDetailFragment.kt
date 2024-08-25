@@ -10,14 +10,9 @@ import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.example.softwareupdate.adapters.allapps.AllAppsEntity
 import com.example.softwareupdate.adapters.sysapps.MySysAppsEntity
-import com.example.softwareupdate.ads.loadNativeAd
-import com.example.softwareupdate.ads.populateNativeAdView
-import com.example.softwareupdate.databinding.CustomNativeViewBinding
 import com.example.softwareupdate.databinding.FragmentSysAppDetailBinding
 import com.example.softwareupdate.utils.AppConstants
-import com.example.softwareupdate.utils.invisible
 import com.example.softwareupdate.utils.isAddedAndNotDetached
-import com.example.softwareupdate.utils.isPlayStoreAvailableForApp
 import com.example.softwareupdate.utils.launchOtherApp
 import com.example.softwareupdate.utils.openPlayStoreForApp
 import com.example.softwareupdate.utils.parcelable
@@ -71,14 +66,6 @@ class SysAppDetailFragment : Fragment() {
                 mySysAppsEntity?.pName?.let { it1 -> context.openPlayStoreForApp(packageName = it1) }
             }
 
-            activity?.loadNativeAd { nativeAdLambda ->
-                if (this@SysAppDetailFragment.isAddedAndNotDetached()) {
-                    val adBinding = CustomNativeViewBinding.inflate(layoutInflater)
-                    nativeAdLambda?.let { populateNativeAdView(it, adBinding) }
-                    nativeAd.removeAllViews()
-                    nativeAd.addView(adBinding.root)
-                }
-            }
             btnShare.setOnClickListener {
                 context?.shareApp(
                     AllAppsEntity(
