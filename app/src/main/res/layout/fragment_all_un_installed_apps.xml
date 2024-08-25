@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.fragments.uninstallapps.AllUnInstalledAppsFragment">
+
+    <include
+        android:id="@+id/header_layout"
+        layout="@layout/header_layout_for_screens" />
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/tv_total_apps"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="@dimen/_10sdp"
+        android:fontFamily="@font/poppins_medium"
+        android:text="@string/total_apps_count"
+        android:textColor="@color/white"
+        android:textSize="@dimen/_13ssp"
+        app:layout_constraintBottom_toBottomOf="@+id/customSelectAll"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/customSelectAll" />
+
+    <com.example.softwareupdate.utils.MyCustomSelectAllCheckBox
+        android:id="@+id/customSelectAll"
+        android:layout_width="@dimen/_25sdp"
+        android:layout_height="@dimen/_25sdp"
+        android:layout_marginEnd="@dimen/_13sdp"
+        android:button="@null"
+        android:checked="false"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/header_layout" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rv_unInstallAdapter"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginHorizontal="@dimen/_10sdp"
+        android:layout_marginTop="@dimen/_10sdp"
+        android:orientation="vertical"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/customSelectAll" />
+
+    <ProgressBar
+        android:id="@+id/loading_progress_bar_unInstall"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/unInstallBtn"
+        android:layout_width="@dimen/_100sdp"
+        android:layout_height="@dimen/_34sdp"
+        android:layout_marginBottom="@dimen/_20sdp"
+        android:background="@drawable/un_install_btn_shape"
+        android:text="@string/uninstall"
+        android:visibility="gone"
+        app:backgroundTint="@color/splash_progressbar_gradient_start_color"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
+
+    </com.google.android.material.button.MaterialButton>
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/app_uninstall_count"
+        android:layout_width="@dimen/_18sdp"
+        android:layout_height="@dimen/_18sdp"
+        android:layout_marginEnd="0dp"
+        android:background="@drawable/circle_shape"
+        android:gravity="center"
+        android:text="@string/_0"
+        android:textColor="@color/white"
+        android:textSize="@dimen/_8sdp"
+        android:visibility="gone"
+        app:layout_constraintBottom_toTopOf="@+id/unInstallBtn"
+        app:layout_constraintEnd_toEndOf="@+id/unInstallBtn"
+        app:layout_constraintTop_toTopOf="@+id/unInstallBtn" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

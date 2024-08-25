@@ -1,0 +1,276 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.fragments.appPrivacy.AppPrivacyRiskManagerFragment">
+
+    <include
+        android:id="@+id/header_layout"
+        layout="@layout/header_layout_for_screens" />
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/chart_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/_10sdp"
+        android:background="@drawable/round_gradient_shape"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHeight_percent="0.3"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/header_layout">
+
+        <com.github.mikephil.charting.charts.PieChart
+            android:id="@+id/pieChart"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHeight_percent="0.65"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/layout_selector"
+            app:layout_constraintVertical_bias="0"
+            app:layout_constraintWidth_percent="0.65" />
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/layout_chart_indicator"
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/_20sdp"
+            android:layout_marginHorizontal="@dimen/_10sdp"
+            android:layout_marginVertical="@dimen/_10sdp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/pieChart">
+
+            <View
+                android:id="@+id/high_risk_indicator"
+                android:layout_width="@dimen/_10sdp"
+                android:layout_height="@dimen/_10sdp"
+                android:background="@drawable/privacy_manager_dot_indicator"
+                android:backgroundTint="@color/green_color"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/tv_high_risk_indicator"
+                android:layout_width="@dimen/_50sdp"
+                android:layout_height="wrap_content"
+                android:ellipsize="marquee"
+                android:focusable="true"
+                android:fontFamily="@font/poppins_medium"
+                android:importantForAccessibility="no"
+                android:marqueeRepeatLimit="marquee_forever"
+                android:singleLine="true"
+                android:text="@string/high_risk_apps"
+                android:textAlignment="center"
+                android:textColor="@color/white"
+                android:textSize="@dimen/_8ssp"
+                app:layout_constraintBottom_toBottomOf="@+id/high_risk_indicator"
+                app:layout_constraintStart_toEndOf="@id/high_risk_indicator"
+                app:layout_constraintTop_toTopOf="@+id/high_risk_indicator" />
+
+            <View
+                android:id="@+id/vertical_line_high_risk"
+                android:layout_width="@dimen/_1sdp"
+                android:layout_height="match_parent"
+                android:layout_marginVertical="@dimen/_5sdp"
+                android:background="@color/white"
+                android:visibility="invisible"
+                app:layout_constraintStart_toEndOf="@+id/tv_high_risk_indicator" />
+
+
+            <View
+                android:id="@+id/low_risk_indicator"
+                android:layout_width="@dimen/_10sdp"
+                android:layout_height="@dimen/_10sdp"
+                android:layout_marginStart="@dimen/_10sdp"
+                android:background="@drawable/privacy_manager_dot_indicator"
+                android:backgroundTint="@color/red_color"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/vertical_line_high_risk"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/tv_low_risk_indicator"
+                android:layout_width="@dimen/_70sdp"
+                android:layout_height="wrap_content"
+                android:focusable="true"
+                android:fontFamily="@font/poppins_medium"
+                android:importantForAccessibility="no"
+                android:singleLine="true"
+                android:text="@string/avg_risk_apps"
+                android:textAlignment="center"
+                android:textColor="@color/white"
+                android:textSize="@dimen/_8ssp"
+                app:layout_constraintBottom_toBottomOf="@+id/low_risk_indicator"
+                app:layout_constraintStart_toEndOf="@id/low_risk_indicator"
+                app:layout_constraintTop_toTopOf="@+id/low_risk_indicator" />
+
+            <View
+                android:id="@+id/vertical_line_low_risk"
+                android:layout_width="@dimen/_1sdp"
+                android:layout_height="match_parent"
+                android:layout_marginVertical="@dimen/_5sdp"
+                android:background="@color/white"
+                android:visibility="invisible"
+                app:layout_constraintStart_toEndOf="@+id/tv_low_risk_indicator" />
+
+
+            <View
+                android:id="@+id/avg_risk_indicator"
+                android:layout_width="@dimen/_10sdp"
+                android:layout_height="@dimen/_10sdp"
+                android:layout_marginStart="@dimen/_10sdp"
+                android:background="@drawable/privacy_manager_dot_indicator"
+                android:backgroundTint="@color/blue_color"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/vertical_line_low_risk"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/tv_avg_risk_indicator"
+                android:layout_width="@dimen/_50sdp"
+                android:layout_height="wrap_content"
+                android:ellipsize="marquee"
+                android:focusable="true"
+                android:fontFamily="@font/poppins_medium"
+                android:importantForAccessibility="no"
+                android:marqueeRepeatLimit="marquee_forever"
+                android:singleLine="true"
+                android:text="@string/low_risk_apps"
+                android:textAlignment="center"
+                android:textColor="@color/white"
+                android:textSize="@dimen/_8ssp"
+                app:layout_constraintBottom_toBottomOf="@+id/avg_risk_indicator"
+                app:layout_constraintStart_toEndOf="@id/avg_risk_indicator"
+                app:layout_constraintTop_toTopOf="@+id/avg_risk_indicator" />
+
+            <View
+                android:layout_width="@dimen/_1sdp"
+                android:layout_height="match_parent"
+                android:layout_marginHorizontal="@dimen/_10sdp"
+                android:layout_marginVertical="@dimen/_5sdp"
+                android:background="@color/white"
+                android:visibility="invisible"
+                app:layout_constraintStart_toEndOf="@+id/tv_avg_risk_indicator" />
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/tv_percentage"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="@dimen/_5sdp"
+            android:layout_marginVertical="@dimen/_10sdp"
+            android:elevation="@dimen/_5sdp"
+            android:fontFamily="@font/poppins_bold"
+            android:text="@string/_40"
+            android:textColor="@color/white"
+            android:textSize="@dimen/_13ssp"
+            app:layout_constraintBottom_toBottomOf="@+id/pieChart"
+            app:layout_constraintEnd_toEndOf="@+id/pieChart"
+            app:layout_constraintStart_toStartOf="@+id/pieChart"
+            app:layout_constraintTop_toTopOf="@+id/pieChart"
+            app:layout_constraintVertical_bias="0.4" />
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/tv_percentage_value"
+            android:layout_width="@dimen/_60sdp"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="@dimen/_15sdp"
+            android:elevation="@dimen/_5sdp"
+            android:ellipsize="marquee"
+            android:focusable="true"
+            android:fontFamily="@font/poppins_medium"
+            android:importantForAccessibility="no"
+            android:marqueeRepeatLimit="marquee_forever"
+            android:singleLine="true"
+            android:text="@string/average_risk"
+            android:textAlignment="center"
+            android:textColor="@color/white"
+            android:textSize="@dimen/_10ssp"
+            app:layout_constraintEnd_toEndOf="@+id/pieChart"
+            app:layout_constraintStart_toStartOf="@+id/pieChart"
+            app:layout_constraintTop_toBottomOf="@+id/tv_percentage" />
+
+        <View
+            android:id="@+id/layout_selector"
+            android:layout_width="@dimen/_100sdp"
+            android:layout_height="@dimen/_23sdp"
+            android:layout_margin="@dimen/_10sdp"
+            android:background="@drawable/bg_selector_shape"
+            android:elevation="@dimen/_5sdp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/tv_selector"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="@dimen/_10sdp"
+            android:layout_marginVertical="@dimen/_10sdp"
+            android:elevation="@dimen/_5sdp"
+            android:fontFamily="@font/poppins_medium"
+            android:text="@string/avg_risk"
+            android:textColor="@color/white"
+            android:textSize="@dimen/_9ssp"
+            app:layout_constraintBottom_toBottomOf="@+id/layout_selector"
+            app:layout_constraintEnd_toStartOf="@+id/iv_arrow"
+            app:layout_constraintStart_toStartOf="@+id/layout_selector"
+            app:layout_constraintTop_toTopOf="@+id/layout_selector" />
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/iv_arrow"
+            android:layout_width="@dimen/_20sdp"
+            android:layout_height="@dimen/_20sdp"
+            android:layout_marginHorizontal="@dimen/_6sdp"
+            android:elevation="@dimen/_10sdp"
+            android:scaleType="fitXY"
+            app:layout_constraintBottom_toBottomOf="@+id/layout_selector"
+            app:layout_constraintEnd_toEndOf="@+id/layout_selector"
+            app:layout_constraintTop_toTopOf="@+id/layout_selector"
+            app:srcCompat="@drawable/baseline_arrow_drop_down_24" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/tv_privacy"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginVertical="@dimen/_10sdp"
+        android:fontFamily="@font/poppins_medium"
+        android:text="@string/app_privacy"
+        android:textColor="@color/white"
+        android:textSize="@dimen/_10ssp"
+        app:layout_constraintStart_toStartOf="@+id/chart_layout"
+        app:layout_constraintTop_toBottomOf="@+id/chart_layout" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rv_install_apps"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginHorizontal="@dimen/_10sdp"
+        android:layout_marginTop="@dimen/_10sdp"
+        android:orientation="vertical"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_privacy" />
+
+    <ProgressBar
+        android:id="@+id/loading_progress_bar_versions"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

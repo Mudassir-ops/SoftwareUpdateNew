@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/logo_bg"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:elevation="@dimen/_5sdp"
+        android:scaleType="fitCenter"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHeight_percent="0.24"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintWidth_percent="0.5"
+        app:srcCompat="@drawable/splash_icon_bg" />
+
+    <com.airbnb.lottie.LottieAnimationView
+        android:id="@+id/setting_icon"
+        android:layout_width="110dp"
+        android:layout_height="110dp"
+        android:layout_marginStart="5sp"
+        android:layout_marginTop="20dp"
+        android:elevation="@dimen/_5sdp"
+        android:scaleType="fitXY"
+        app:layout_constraintEnd_toEndOf="@+id/logo_bg"
+        app:layout_constraintHeight_percent="0.07"
+        app:layout_constraintStart_toStartOf="@id/logo_bg"
+        app:layout_constraintTop_toTopOf="@+id/logo_bg"
+        app:layout_constraintVertical_chainStyle="packed"
+        app:layout_constraintWidth_percent="0.15"
+        app:lottie_autoPlay="true"
+        app:lottie_loop="true"
+        app:lottie_rawRes="@raw/splash_lottie" />
+
+    <ProgressBar
+        android:id="@+id/progress_horizontal"
+        style="?android:attr/progressBarStyleHorizontal"
+        android:layout_width="@dimen/_80sdp"
+        android:layout_height="7dp"
+        android:layout_marginHorizontal="60dp"
+        android:layout_marginBottom="50dp"
+        android:layout_marginTop="@dimen/_5sdp"
+        android:elevation="@dimen/_5sdp"
+        android:max="100"
+        android:progress="0"
+        android:progressDrawable="@drawable/custom_progress_bar_bg"
+        app:layout_constraintBottom_toTopOf="@+id/update_text"
+        app:layout_constraintEnd_toEndOf="@+id/setting_icon"
+        app:layout_constraintStart_toStartOf="@+id/setting_icon"
+        app:layout_constraintTop_toBottomOf="@+id/setting_icon"
+        app:layout_constraintVertical_chainStyle="packed" />
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/update_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="60dp"
+        android:elevation="@dimen/_5sdp"
+        android:text="@string/update"
+        android:textColor="@color/white"
+        android:textSize="12sp"
+        app:layout_constraintBottom_toBottomOf="@+id/logo_bg"
+        app:layout_constraintEnd_toEndOf="@+id/progress_horizontal"
+        app:layout_constraintStart_toStartOf="@+id/progress_horizontal" />
+
+
+    <com.google.android.material.textview.MaterialTextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="-35dp"
+        android:elevation="@dimen/_5sdp"
+        android:text="@string/software_update_app"
+        android:textColor="@color/white"
+        android:textSize="@dimen/_16ssp"
+        app:layout_constraintEnd_toEndOf="@+id/logo_bg"
+        app:layout_constraintStart_toStartOf="@+id/logo_bg"
+        app:layout_constraintTop_toBottomOf="@+id/logo_bg" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <variable
+            name="allEntity"
+            type="com.example.softwareupdate.adapters.allapps.AllAppsEntity" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/_5sdp"
+        android:background="@drawable/round_gradient_shape"
+        android:padding="@dimen/_5sdp">
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/iv_app_version"
+            android:layout_width="@dimen/_35sdp"
+            android:layout_height="@dimen/_35sdp"
+            android:layout_marginVertical="@dimen/_5sdp"
+            android:layout_marginStart="@dimen/_10sdp"
+            android:layout_marginEnd="@dimen/_10sdp"
+            android:scaleType="fitXY"
+            app:drawableImage="@{allEntity.icon}"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/android_icon_hd" />
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/tv_version_title"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/_10sdp"
+            android:layout_marginEnd="@dimen/_10sdp"
+            android:ellipsize="marquee"
+            android:focusable="true"
+            android:fontFamily="@font/poppins_medium"
+            android:marqueeRepeatLimit="marquee_forever"
+            android:singleLine="true"
+            android:text="@{allEntity.component1}"
+            android:textColor="@color/white"
+            android:textSize="@dimen/_12ssp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toTopOf="@+id/tv_version"
+            app:layout_constraintEnd_toStartOf="@+id/customCheckBox"
+            app:layout_constraintStart_toEndOf="@+id/iv_app_version"
+            app:layout_constraintTop_toTopOf="@+id/iv_app_version"
+            app:layout_constraintVertical_chainStyle="packed" />
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/tv_version"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/_10sdp"
+            android:ellipsize="marquee"
+            android:focusable="true"
+            android:fontFamily="@font/poppins"
+            android:marqueeRepeatLimit="marquee_forever"
+            android:singleLine="true"
+            android:text="@{allEntity.component6}"
+            android:textColor="@color/white"
+            android:textSize="@dimen/_9ssp"
+            app:layout_constraintBottom_toBottomOf="@+id/iv_app_version"
+            app:layout_constraintEnd_toStartOf="@+id/customCheckBox"
+            app:layout_constraintStart_toStartOf="@+id/tv_version_title"
+            app:layout_constraintTop_toBottomOf="@+id/tv_version_title" />
+
+        <com.example.softwareupdate.utils.MyCustomCheckBox
+            android:id="@+id/customCheckBox"
+            android:layout_width="@dimen/_22sdp"
+            android:layout_height="@dimen/_22sdp"
+            android:layout_marginEnd="@dimen/_15sdp"
+            android:button="@null"
+            android:checked="@{allEntity.component7}"
+            android:clickable="false"
+            android:enabled="false"
+            android:focusable="false"
+            app:layout_constraintBottom_toBottomOf="@+id/iv_app_version"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/iv_app_version" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>

@@ -1,0 +1,371 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/app_color"
+    tools:context=".ui.fragments.deviceInfo.DeviceInfoFragment">
+
+
+    <View
+        android:id="@+id/viewTop"
+        android:layout_width="0dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="@dimen/_8sdp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/icBack"
+        android:layout_width="50dp"
+        android:layout_height="0dp"
+        android:padding="@dimen/_10sdp"
+        app:layout_constraintEnd_toStartOf="@id/txtDeviceInfo"
+        app:layout_constraintBottom_toBottomOf="@id/viewTop"
+        app:layout_constraintStart_toStartOf="@id/viewTop"
+        app:layout_constraintTop_toTopOf="@id/viewTop"
+        app:srcCompat="@drawable/baseline_arrow_back_ios_new_24" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/txtDeviceInfo"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/poppins"
+        android:gravity="center"
+        android:text="@string/device_info"
+        android:textColor="@color/white"
+        android:textSize="@dimen/_12sdp"
+        app:layout_constraintBottom_toBottomOf="@id/viewTop"
+        app:layout_constraintEnd_toEndOf="@id/viewTop"
+        app:layout_constraintStart_toEndOf="@id/icBack"
+        app:layout_constraintTop_toTopOf="@id/viewTop" />
+
+    <View
+        android:id="@+id/viewName"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:background="@drawable/round_storke_gradient_extra_corner"
+        android:layout_marginTop="@dimen/_20sdp"
+        app:layout_constraintBottom_toTopOf="@id/viewRam"
+        app:layout_constraintEnd_toStartOf="@id/viewModel"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/viewTop"
+        app:layout_constraintWidth_percent="0.43" />
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/icViewName"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:padding="@dimen/_10sdp"
+        app:layout_constraintBottom_toTopOf="@id/txtStaticName"
+        app:layout_constraintEnd_toEndOf="@id/viewName"
+        app:layout_constraintStart_toStartOf="@id/viewName"
+        app:layout_constraintTop_toTopOf="@id/viewName"
+        app:srcCompat="@drawable/ic_name" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/txtStaticName"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/_5sdp"
+        android:fontFamily="@font/poppins"
+        android:gravity="center"
+        android:text="@string/name"
+        android:textColor="@color/white"
+        app:layout_constraintBottom_toTopOf="@id/txtDeviceName"
+        app:layout_constraintEnd_toEndOf="@id/viewName"
+        app:layout_constraintStart_toStartOf="@id/viewName"
+        app:layout_constraintTop_toBottomOf="@id/icViewName" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/txtDeviceName"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/_5sdp"
+        android:fontFamily="@font/poppins"
+        android:gravity="center"
+        android:text="@string/vivo"
+        android:textColor="@color/yellow_color"
+        app:layout_constraintBottom_toBottomOf="@id/viewName"
+        app:layout_constraintEnd_toEndOf="@id/viewName"
+        app:layout_constraintStart_toStartOf="@id/viewName"
+        app:layout_constraintTop_toBottomOf="@id/txtStaticName" />
+
+
+    <View
+        android:id="@+id/viewModel"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:background="@drawable/round_storke_gradient_extra_corner"
+        app:layout_constraintBottom_toBottomOf="@id/viewName"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/viewName"
+        app:layout_constraintTop_toTopOf="@id/viewName"
+        app:layout_constraintWidth_percent="0.43" />
+
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/icViewModel"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:padding="@dimen/_10sdp"
+        app:layout_constraintBottom_toTopOf="@id/txtStaticModel"
+        app:layout_constraintEnd_toEndOf="@id/viewModel"
+        app:layout_constraintStart_toStartOf="@id/viewModel"
+        app:layout_constraintTop_toTopOf="@id/viewModel"
+        app:srcCompat="@drawable/ic_model" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/txtStaticModel"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/_5sdp"
+        android:fontFamily="@font/poppins"
+        android:gravity="center"
+        android:text="@string/model"
+        android:textColor="@color/white"
+        app:layout_constraintBottom_toTopOf="@id/txtDeviceModel"
+        app:layout_constraintEnd_toEndOf="@id/viewModel"
+        app:layout_constraintStart_toStartOf="@id/viewModel"
+        app:layout_constraintTop_toBottomOf="@id/icViewModel" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/txtDeviceModel"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/_5sdp"
+        android:fontFamily="@font/poppins"
+        android:gravity="center"
+        android:text="@string/vivo"
+        android:textColor="@color/yellow_color"
+        app:layout_constraintBottom_toBottomOf="@id/viewModel"
+        app:layout_constraintEnd_toEndOf="@id/viewModel"
+        app:layout_constraintStart_toStartOf="@id/viewModel"
+        app:layout_constraintTop_toBottomOf="@id/txtStaticModel" />
+
+
+    <View
+        android:id="@+id/viewRam"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginVertical="@dimen/_10sdp"
+        android:background="@drawable/round_storke_gradient_extra_corner"
+        app:layout_constraintBottom_toTopOf="@id/viewStorage"
+        app:layout_constraintEnd_toStartOf="@id/viewVersion"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/viewName"
+        app:layout_constraintWidth_percent="0.43" />
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/icViewRam"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:padding="@dimen/_10sdp"
+        app:layout_constraintBottom_toTopOf="@id/txtStaticRam"
+        app:layout_constraintEnd_toEndOf="@id/viewRam"
+        app:layout_constraintStart_toStartOf="@id/viewRam"
+        app:layout_constraintTop_toTopOf="@id/viewRam"
+        app:srcCompat="@drawable/ic_ram" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/txtStaticRam"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/_5sdp"
+        android:fontFamily="@font/poppins"
+        android:gravity="center"
+        android:text="@string/ram"
+        android:textColor="@color/white"
+        app:layout_constraintBottom_toTopOf="@id/txtDeviceRam"
+        app:layout_constraintEnd_toEndOf="@id/viewRam"
+        app:layout_constraintStart_toStartOf="@id/viewRam"
+        app:layout_constraintTop_toBottomOf="@id/icViewRam" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/txtDeviceRam"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/_5sdp"
+        android:fontFamily="@font/poppins"
+        android:gravity="center"
+        android:text="@string/vivo"
+        android:textColor="@color/yellow_color"
+        app:layout_constraintBottom_toBottomOf="@id/viewRam"
+        app:layout_constraintEnd_toEndOf="@id/viewRam"
+        app:layout_constraintStart_toStartOf="@id/viewRam"
+        app:layout_constraintTop_toBottomOf="@id/txtStaticRam" />
+
+
+    <View
+        android:id="@+id/viewVersion"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:background="@drawable/round_storke_gradient_extra_corner"
+        app:layout_constraintBottom_toBottomOf="@id/viewRam"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/viewRam"
+        app:layout_constraintTop_toTopOf="@id/viewRam"
+        app:layout_constraintWidth_percent="0.43" />
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/icViewVersion"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:padding="@dimen/_10sdp"
+        app:layout_constraintBottom_toTopOf="@id/txtStaticVersion"
+        app:layout_constraintEnd_toEndOf="@id/viewVersion"
+        app:layout_constraintStart_toStartOf="@id/viewVersion"
+        app:layout_constraintTop_toTopOf="@id/viewVersion"
+        app:srcCompat="@drawable/ic_version" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/txtStaticVersion"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/_5sdp"
+        android:fontFamily="@font/poppins"
+        android:gravity="center"
+        android:text="@string/version"
+        android:textColor="@color/white"
+        app:layout_constraintBottom_toTopOf="@id/txtDeviceVersion"
+        app:layout_constraintEnd_toEndOf="@id/viewVersion"
+        app:layout_constraintStart_toStartOf="@id/viewVersion"
+        app:layout_constraintTop_toBottomOf="@id/icViewVersion" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/txtDeviceVersion"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/_5sdp"
+        android:fontFamily="@font/poppins"
+        android:gravity="center"
+        android:text="@string/vivo"
+        android:textColor="@color/yellow_color"
+        app:layout_constraintBottom_toBottomOf="@id/viewVersion"
+        app:layout_constraintEnd_toEndOf="@id/viewVersion"
+        app:layout_constraintStart_toStartOf="@id/viewVersion"
+        app:layout_constraintTop_toBottomOf="@id/txtStaticVersion" />
+
+    <View
+        android:id="@+id/viewStorage"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginBottom="@dimen/_20sdp"
+        android:background="@drawable/round_storke_gradient_extra_corner"
+        app:layout_constraintBottom_toTopOf="@id/icDeviceInfo"
+        app:layout_constraintEnd_toStartOf="@id/viewDeviceId"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/viewRam"
+        app:layout_constraintWidth_percent="0.43" />
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/icViewStorage"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:padding="@dimen/_10sdp"
+        app:layout_constraintBottom_toTopOf="@id/txtStaticStorage"
+        app:layout_constraintEnd_toEndOf="@id/viewStorage"
+        app:layout_constraintStart_toStartOf="@id/viewStorage"
+        app:layout_constraintTop_toTopOf="@id/viewStorage"
+        app:srcCompat="@drawable/ic_storage" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/txtStaticStorage"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/_5sdp"
+        android:fontFamily="@font/poppins"
+        android:gravity="center"
+        android:text="@string/storage"
+        android:textColor="@color/white"
+        app:layout_constraintBottom_toTopOf="@id/txtDeviceStorage"
+        app:layout_constraintEnd_toEndOf="@id/viewStorage"
+        app:layout_constraintStart_toStartOf="@id/viewStorage"
+        app:layout_constraintTop_toBottomOf="@id/icViewStorage" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/txtDeviceStorage"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/_5sdp"
+        android:fontFamily="@font/poppins"
+        android:gravity="center"
+        android:text="@string/vivo"
+        android:textColor="@color/yellow_color"
+        app:layout_constraintBottom_toBottomOf="@id/viewStorage"
+        app:layout_constraintEnd_toEndOf="@id/viewStorage"
+        app:layout_constraintStart_toStartOf="@id/viewStorage"
+        app:layout_constraintTop_toBottomOf="@id/txtStaticStorage" />
+
+
+    <View
+        android:id="@+id/viewDeviceId"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:background="@drawable/round_storke_gradient_extra_corner"
+        app:layout_constraintBottom_toBottomOf="@id/viewStorage"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/viewStorage"
+        app:layout_constraintTop_toTopOf="@id/viewStorage"
+        app:layout_constraintWidth_percent="0.43" />
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/icViewDeviceId"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:padding="@dimen/_10sdp"
+        app:layout_constraintBottom_toTopOf="@id/txtStaticDeviceId"
+        app:layout_constraintEnd_toEndOf="@id/viewDeviceId"
+        app:layout_constraintStart_toStartOf="@id/viewDeviceId"
+        app:layout_constraintTop_toTopOf="@id/viewDeviceId"
+        app:srcCompat="@drawable/ic_device_id" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/txtStaticDeviceId"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/_5sdp"
+        android:fontFamily="@font/poppins"
+        android:gravity="center"
+        android:text="@string/deviceid"
+        android:textColor="@color/white"
+        app:layout_constraintBottom_toTopOf="@id/txtDeviceDeviceId"
+        app:layout_constraintEnd_toEndOf="@id/viewDeviceId"
+        app:layout_constraintStart_toStartOf="@id/viewDeviceId"
+        app:layout_constraintTop_toBottomOf="@id/icViewDeviceId" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/txtDeviceDeviceId"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/_5sdp"
+        android:fontFamily="@font/poppins"
+        android:gravity="center"
+        android:text="@string/vivo"
+        android:singleLine="true"
+        android:scrollHorizontally="true"
+        android:ellipsize="marquee"
+        android:marqueeRepeatLimit="marquee_forever"
+        android:textColor="@color/yellow_color"
+        app:layout_constraintBottom_toBottomOf="@id/viewDeviceId"
+        app:layout_constraintEnd_toEndOf="@id/viewDeviceId"
+        app:layout_constraintStart_toStartOf="@id/viewDeviceId"
+        app:layout_constraintTop_toBottomOf="@id/txtStaticDeviceId" />
+
+
+
+    <View
+        android:id="@+id/icDeviceInfo"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:padding="@dimen/_8sdp"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHeight_percent="0.35"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/viewStorage"
+        app:srcCompat="@drawable/device" />
+</androidx.constraintlayout.widget.ConstraintLayout>

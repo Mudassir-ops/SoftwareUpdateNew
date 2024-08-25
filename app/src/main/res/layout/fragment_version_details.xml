@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.fragments.version.VersionDetailsFragment">
+
+    <include
+        android:id="@+id/header_layout"
+        layout="@layout/header_layout_for_screens" />
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/tv_scrollable_version_detail"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginHorizontal="@dimen/_15sdp"
+        android:layout_marginVertical="@dimen/_10sdp"
+        android:background="@drawable/un_install_btn_shape"
+        android:backgroundTint="@color/gray_2"
+        android:paddingVertical="@dimen/_5sdp"
+        android:paddingHorizontal="@dimen/_8sdp"
+        android:justificationMode="inter_word"
+        android:layout_gravity="center_horizontal|center"
+        android:scrollbars="vertical"
+        android:textColor="@color/black"
+        android:text="@string/version_1.6_detail"
+        android:textSize="@dimen/_14ssp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/header_layout" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

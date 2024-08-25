@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/mobile_navigation"
+    app:startDestination="@+id/navigation_splash">
+
+    <fragment
+        android:id="@+id/navigation_splash"
+        android:name="com.example.softwareupdate.ui.fragments.splash.SplashFragment"
+        android:label="Home Fragment"
+        tools:layout="@layout/fragment_splash">
+
+        <action
+            android:id="@+id/action_navigation_splash_to_navigation_home"
+            app:destination="@id/navigation_home" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/navigation_home"
+        android:name="com.example.softwareupdate.ui.fragments.home.HomeFragment"
+        android:label="Home Fragment"
+        tools:layout="@layout/fragment_home">
+
+        <action
+            android:id="@+id/action_navigation_home_to_navigation_api_versions"
+            app:destination="@id/navigation_api_versions" />
+        <action
+            android:id="@+id/action_navigation_home_to_navigation_system_applications"
+            app:destination="@id/navigation_system_applications" />
+        <action
+            android:id="@+id/action_navigation_home_to_navigation_all_installed_apps"
+            app:destination="@id/navigation_all_installed_apps" />
+        <action
+            android:id="@+id/action_navigation_home_to_navigation_all_UnInstalled_apps"
+            app:destination="@id/navigation_all_UnInstalled_apps" />
+        <action
+            android:id="@+id/action_navigation_home_to_app_privacy_manager"
+            app:destination="@id/app_privacy_manager" />
+        <action
+            android:id="@+id/action_navigation_home_to_navigation_updatedApps"
+            app:destination="@id/navigation_updatedApps" />
+        <action
+            android:id="@+id/action_navigation_home_to_navigation_language"
+            app:destination="@id/navigation_language" />
+        <action
+            android:id="@+id/action_navigation_home_to_deviceInfoFragment"
+            app:destination="@id/deviceInfoFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/navigation_api_versions"
+        android:name="com.example.softwareupdate.ui.fragments.version.VersionsFragment"
+        android:label="Versions Fragment"
+        tools:layout="@layout/fragment_versions">
+        <action
+            android:id="@+id/action_navigation_api_versions_to_versionDetailsFragment"
+            app:destination="@id/versionDetailsFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/navigation_system_applications"
+        android:name="com.example.softwareupdate.ui.fragments.sysapps.AllSystemAppsFragment"
+        android:label="System Apps Fragment"
+
+        tools:layout="@layout/fragment_all_system_apps">
+        <action
+            android:id="@+id/action_navigation_system_applications_to_navigation_system_applications_details"
+            app:destination="@id/navigation_system_applications_details" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/navigation_system_applications_details"
+        android:name="com.example.softwareupdate.ui.fragments.sysapps.SysAppDetailFragment"
+        android:label="System App Detail Fragment"
+
+        tools:layout="@layout/fragment_sys_app_detail">
+        <action
+            android:id="@+id/action_navigation_system_applications_details_to_navigation_system_applications"
+            app:destination="@id/navigation_system_applications" />
+    </fragment>
+
+
+    <fragment
+        android:id="@+id/navigation_all_installed_apps"
+        android:name="com.example.softwareupdate.ui.fragments.installapps.AllInstalledAppsFragment"
+        android:label="All Install App  Fragment"
+        tools:layout="@layout/fragment_all_installed_apps">
+        <action
+            android:id="@+id/action_navigation_all_installed_apps_to_navigation_install_app_detail"
+            app:destination="@id/navigation_install_app_detail" />
+    </fragment>
+
+
+    <fragment
+        android:id="@+id/navigation_install_app_detail"
+        android:name="com.example.softwareupdate.ui.fragments.installapps.InstalledAppDetailFragment"
+        android:label="Install App Detail Fragment"
+        tools:layout="@layout/fragment_installed_app_detail" />
+
+
+    <fragment
+        android:id="@+id/navigation_all_UnInstalled_apps"
+        android:name="com.example.softwareupdate.ui.fragments.uninstallapps.AllUnInstalledAppsFragment"
+        android:label="All Un Install App  Fragment"
+        tools:layout="@layout/fragment_all_un_installed_apps" />
+    <fragment
+        android:id="@+id/versionDetailsFragment"
+        android:name="com.example.softwareupdate.ui.fragments.version.VersionDetailsFragment"
+        android:label="fragment_version_details"
+        tools:layout="@layout/fragment_version_details" />
+
+    <fragment
+        android:id="@+id/app_privacy_manager"
+        android:name="com.example.softwareupdate.ui.fragments.appPrivacy.AppPrivacyRiskManagerFragment"
+        android:label="fragment app privacy manager"
+        tools:layout="@layout/fragment_app_privacy_risk_manager">
+        <action
+            android:id="@+id/action_app_privacy_manager_to_navigation_privacy_manager_detail"
+            app:destination="@id/navigation_privacy_manager_detail" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/navigation_privacy_manager_detail"
+        android:name="com.example.softwareupdate.ui.fragments.appPrivacy.PrivacyManagerDetailFragment"
+        android:label="fragment privacy manager detail"
+        tools:layout="@layout/fragment_privacy_manager_detail" />
+
+    <fragment
+        android:id="@+id/navigation_updatedApps"
+        android:name="com.example.softwareupdate.ui.fragments.availableupdates.AvailableUpdatedAppFragment"
+        android:label="fragment Updated Apps"
+        tools:layout="@layout/fragment_available_updated_app" />
+
+
+    <fragment
+        android:id="@+id/navigation_language"
+        android:name="com.example.softwareupdate.ui.fragments.language.LanguageFragment"
+        android:label="fragment Language"
+        tools:layout="@layout/fragment_language" />
+    <fragment
+        android:id="@+id/deviceInfoFragment"
+        android:name="com.example.softwareupdate.ui.fragments.deviceInfo.DeviceInfoFragment"
+        android:label="fragment_device_info"
+        tools:layout="@layout/fragment_device_info" />
+
+
+</navigation>

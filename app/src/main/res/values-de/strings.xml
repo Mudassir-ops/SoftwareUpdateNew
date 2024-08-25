@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Software aktualisieren</string>
+    <string name="no_launcher">Kein Launcher</string>
+    <string name="software_update_app">Software-Update-App</string>
+    <string name="view_more">Apps anzeigen</string>
+    <string name="other_feature">Andere Funktion</string>
+    <string name="android_system_update">Android-Systemupdate</string>
+    <string name="features">Funktionen</string>
+    <string name="available_for_update">Verfügbar für Update</string>
+    <string name="_52_apps_are"> Apps sind</string>
+    <string name="update">Aktualisieren…</string>
+    <string name="start_nscan">STARTEN\n SCAN</string>
+    <string name="scanning">SCAN\n NING</string>
+    <string name="scanned">GESCANNT</string>
+    <string name="upside_down_cake">Upside Down Cake</string>
+    <string name="android_14">Android 14</string>
+    <string name="search_name">Namen suchen</string>
+    <string name="android_versions">Android-Versionen</string>
+    <string name="system_applications">Systemanwendungen</string>
+    <string name="check">Prüfen</string>
+    <string name="installed_apps">Installierte Apps</string>
+    <string name="available_updates">Verfügbare Updates</string>
+    <string name="uninstall">Deinstallieren</string>
+    <string name="_0">0</string>
+    <string name="uninstall_apps">Apps deinstallieren</string>
+    <string name="total_apps_count">Gesamtanzahl der Apps (%1$d)</string>
+    <string name="launch">Starten</string>
+    <string name="share">Teilen</string>
+    <string name="view_on_play_store">IM PLAY STORE ANSEHEN</string>
+    <string name="app_version">App-Version</string>
+    <string name="_12_2_2002">12.2.2002</string>
+    <string name="last_updated">Zuletzt aktualisiert</string>
+    <string name="dex_21_2008">Dex 21,2008</string>
+    <string name="ad">Anzeige</string>
+    <string name="janbark_task">JanBark-Aufgabe</string>
+    <string name="large_notification_showing_a_title_and_a_body">Große Benachrichtigung, die einen Titel und einen Text anzeigt.</string>
+    <string name="this_is_the_body_the_height_is_manually_forced_to_300dp">Dies ist der Text. Die Höhe wird manuell auf 300dp festgelegt.</string>
+    <string name="open">Öffnen</string>
+    <string name="permission_not_allowed">Berechtigungen nicht erlaubt</string>
+    <string name="no_data_available">Keine Daten verfügbar</string>
+    <string name="need_permission">Sie müssen die Speicherberechtigung erteilen, um alle Bilddateien zu erhalten.</string>
+    <string name="allow">Erlauben</string>
+    <string name="dont_allow">Nicht erlauben</string>
+    <string name="ad_clicked">Anzeige angeklickt.</string>
+    <string name="ad_dismissed_fullscreen_content">Anzeige im Vollbildmodus geschlossen.</string>
+    <string name="ad_failed_to_show_fullscreen_content">Anzeige konnte nicht im Vollbildmodus angezeigt werden.</string>
+    <string name="ad_recorded_an_impression">Anzeige hat einen Eindruck hinterlassen.</string>
+    <string name="ad_showed_fullscreen_content">Anzeige zeigte Vollbildinhalt.</string>
+    <string name="the_interstitial_ad_wasn_t_ready_yet">Die Interstitial-Anzeige war noch nicht bereit.</string>
+    <string name="native_ad_loaded">Native Anzeige geladen</string>
+    <string name="failed_to_load_native_ad_with_error">Fehler beim Laden der nativen Anzeige: %1$s</string>
+    <string name="analyze_the_risk_state_of_each_app">Das Risikoprofil jeder App analysieren</string>
+    <string name="app_permissions">App-Berechtigungen</string>
+    <string name="high_permission_app">App mit hohen Berechtigungen</string>
+    <string name="app_declared_as_high_risk_permission">App als Hochrisiko-Berechtigung deklariert</string>
+    <string name="privacy_manager">Datenschutzmanager</string>
+    <string name="high_risk">Hohes Risiko</string>
+    <string name="app_privacy">App-Datenschutz</string>
+    <string name="high_risk_apps">Hochrisiko-Apps</string>
+    <string name="avg_risk_apps">Durchschnittlich riskante Apps</string>
+    <string name="low_risk_apps">Niedrigrisiko-Apps</string>
+    <string name="_40">0%</string>
+    <string name="average_risk">Durchschnittliches Risiko</string>
+    <string name="low_risk">Niedriges Risiko</string>
+    <string name="avg_risk">Durchschnittliches Risiko</string>
+    <string name="percentage_placeholder">%s%%</string>
+    <string name="_0_apps">0</string>
+    <string name="no_ads">Keine Werbung</string>
+    <string name="fast_processing">Schnelle Verarbeitung</string>
+    <string name="screen_time_usage">Bildschirmzeit-Nutzung</string>
+    <string name="upgrade_now">Jetzt upgraden</string>
+    <string name="home">Startseite</string>
+    <string name="languages">Sprachen</string>
+    <string name="change_app_theme">App-Design ändern</string>
+    <string name="privacy_policy">Datenschutzrichtlinie</string>
+    <string name="share_app">App teilen</string>
+    <string name="more_apps_ad">Weitere Apps (Anzeige)</string>
+    <string name="rate_us">Bewerten Sie uns</string>
+    <string name="go_premium">Premium-Version</string>
+    <string name="version_1_0_0">Version 1.0.0</string>
+    <string name="choose_languages">Sprachen auswählen</string>
+    <string name="permission_denied">Berechtigung verweigert</string>
+    <string name="continue_btn">Fortsetzen</string>
+    <string name="no_apps_selected_for_uninstallation">Keine Apps zur Deinstallation ausgewählt</string>
+    <string name="check_for_downloaded_app_updates">Nach heruntergeladenen App-Updates suchen</string>
+    <string name="delete_unnecessary_apps">Alle unnötigen\n Apps löschen</string>
+    <string name="track_your_device_screen_time">Bildschirmzeit Ihres Geräts verfolgen</string>
+
+    <string-array name="privacy_manager_array" translatable="false">
+        <item>High Risk</item>
+        <item>Avg Risk</item>
+        <item>Low Risk</item>
+    </string-array>
+    <string-array name="privacy_manager_array_progress_text" translatable="false">
+        <item>High Risk Apps</item>
+        <item>Average Risk Apps</item>
+        <item>Low Risk Apps</item>
+    </string-array>
+    <string name="app_id" translatable="false">ca-app-pub-3940256099942544~3347511713</string>
+    <string name="interstitial_id" translatable="false">ca-app-pub-3940256099942544/1033173712</string>
+    <string name="native_id" translatable="false">ca-app-pub-3940256099942544/2247696110</string>
+    <string name="privacy_policy_link" translatable="false" />
+    <string name="more_app_link"  translatable="false"/>
+    <string name="version_1_detail" translatable="false">"<b><span style='font-size:18sp;'>Overview</span></b>\n\nAndroid made its official public debut in 2008 with Android 1.0, marking the beginning of the Android operating system. This initial release lacked a cute codename."
+                        "\n\nAndroid 1.1 (API 2):\n\nReleased on February 9, 2009, the Android 1.1 update, internally known as \"Petit Four,\" was initially available for the HTC Dream. This update addressed bugs, made changes to the Android API, and introduced new features, laying the foundation for the evolution of the Android platform.\n\n<b><span style='font-size:18sp;'>Detail</span></b>\n\nThis Android version introduced several notable features. The Android Market facilitated application downloads and updates, while the web browser allowed the viewing of full HTML and XHTML web pages through multiple windows. Camera support was present, but customization options were limited. Folders were introduced for organizing app icons on the Home screen."
+                        "Email services included access to web servers and synchronization with Gmail, Google Contacts, and Google Calendar. Google Maps with Street View provided map and satellite imagery, while Google Sync managed over-the-air synchronization. The device supported Wi-Fi and Bluetooth, and the media player allowed management and playback of media files, excluding video and stereo Bluetooth support."
+                        "Notifications appeared in the Status bar with customizable alerts. Messaging options encompassed instant messaging, text messaging, and MMS. The voice dialer enabled hands-free calling, and users could set wallpapers behind Home screen icons. Other applications included YouTube, Alarm Clock, Calculator, Dialer, Home screen, Pictures, and Settings. Connectivity details were available when searching for businesses on Maps. Additionally, enhancements included a longer in-call screen timeout, dial-pad show/hide functionality, attachment saving in messages, and support for marquee in system layouts."</string>
+    <string name="version_1.5_detail" translatable="false">"<b><span style='font-size:18sp;'>Overview</span></b>\n\nThe inception of Android version names dates back to the early 2009 release of Android 1.5 Cupcake. This milestone brought about several enhancements to the Android interface, notably introducing the inaugural on-screen keyboard. This innovation became essential as phones transitioned away from the previously prevalent physical keyboard model.\n\n<b><span style='font-size:18sp;'>Detail</span></b>\n\nSupport for third-party virtual keyboards with text prediction and a user dictionary for custom words.\nSupport for Widgets – miniature application views that can be embedded in other applications (such as the Home screen) and receive periodic updates.\nVideo recording and playback in MPEG-4 and 3GP formats.\nAuto-pairing and stereo support for Bluetooth (A2DP and AVRCP profiles).\nCopy and paste features in the web browser.\nUser pictures shown for Favorites in Contacts.\nSpecific date/time stamp shown for events in the call log, and one-touch access to a contact card from a call log event.\nAnimated screen transitions.\nAuto-rotation option.\nNew stock boot animation.\nAbility to upload videos to YouTube.\nAbility to upload photos to Picasa.\nAbility to check phone usage history."</string>
+    <string name="version_1.6_detail" translatable="false"><b><span style='font-size:18sp;'>Overview</span></b>\n\nOn September 15, 2009, Android 1.6, named Donut and built on Linux kernel 2.6.29, was released, introducing numerous features. Notable enhancements included a refined interface, the Quick Search Box for swift device and web searches, and Voice Search functionality. The Android Market received updates for better app organization, and camera and camcorder functionalities were improved.\n\n<b><span style='font-size:18sp;'>Detail</span></b>\n\nVoice and text entry search was enhanced in Android 1.6.\nDonut now including bookmark history, contacts, and web results.\nDevelopers gained the ability to include their content in search results, expanding the reach and integration of applications.\nThe release featured a multi-lingual speech synthesis engine, enabling any Android application to "speak" a string of text.Android Market improvements allowed for easier searching and the ability to view app screenshots, enhancing the user experience.\nThe Gallery, Camera, and camcorder functions were more fully integrated, offering faster camera access and the capability for users to select multiple photos for deletion\n.Technical support received updates for CDMA/EVDO, 802.1x, VPNs, and a text-to-speech engine, enhancing connectivity and accessibility features\n.Donut introduced support for WVGA screen resolutions.\n</string>
+</resources>
