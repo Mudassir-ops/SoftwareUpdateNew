@@ -97,6 +97,7 @@ class CheckSoftwareService : Service(), CoroutineScope {
                                 installationDate = appInfo.installationDate
                             )
                         }?.let {
+
                             checkAppUpdateUseCase.insertUpdatedApp(
                                 it
                             )
