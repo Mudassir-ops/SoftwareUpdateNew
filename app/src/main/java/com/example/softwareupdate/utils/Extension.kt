@@ -329,12 +329,12 @@ fun FragmentHomeBinding?.initDrawerClicks(colorString: String, clickCallback: (I
                 clickedViewPosition = 0, colorString
             )
         }
-//        drawerMenuLanguage.setOnClickListener {
-//            clickCallback.invoke(1)
-//            this@initDrawerClicks.highlightDrawerMenuItem(
-//                clickedViewPosition = 1, colorString
-//            )
-//        }
+        drawerMenuDeviceInfo.setOnClickListener {
+            clickCallback.invoke(1)
+            this@initDrawerClicks.highlightDrawerMenuItem(
+                clickedViewPosition = 1, colorString
+            )
+        }
 //        drawerMenuChangeTheme.setOnClickListener {
 //            clickCallback.invoke(2)
 //            this@initDrawerClicks.highlightDrawerMenuItem(
@@ -344,25 +344,25 @@ fun FragmentHomeBinding?.initDrawerClicks(colorString: String, clickCallback: (I
         drawerMenuPrivacyPolicy.setOnClickListener {
             clickCallback.invoke(3)
             this@initDrawerClicks.highlightDrawerMenuItem(
-                clickedViewPosition = 1, colorString
+                clickedViewPosition = 2, colorString
             )
         }
         drawerMenuShareApp.setOnClickListener {
             clickCallback.invoke(4)
             this@initDrawerClicks.highlightDrawerMenuItem(
-                clickedViewPosition = 2, colorString
+                clickedViewPosition = 3, colorString
             )
         }
         drawerMenuMoreApp.setOnClickListener {
             clickCallback.invoke(5)
             this@initDrawerClicks.highlightDrawerMenuItem(
-                clickedViewPosition = 3, colorString
+                clickedViewPosition = 4, colorString
             )
         }
         drawerMenuRateUs.setOnClickListener {
             clickCallback.invoke(6)
             this@initDrawerClicks.highlightDrawerMenuItem(
-                clickedViewPosition = 4, colorString
+                clickedViewPosition = 5, colorString
             )
         }
     }
@@ -373,7 +373,7 @@ fun FragmentHomeBinding?.highlightDrawerMenuItem(
 ) {
     val drawerMenuItems = listOf(
         this@highlightDrawerMenuItem?.drawerLayout?.drawerMenuHome,
-      //  this@highlightDrawerMenuItem?.drawerLayout?.drawerMenuLanguage,
+        this@highlightDrawerMenuItem?.drawerLayout?.drawerMenuDeviceInfo,
       //  this@highlightDrawerMenuItem?.drawerLayout?.drawerMenuChangeTheme,
         this@highlightDrawerMenuItem?.drawerLayout?.drawerMenuPrivacyPolicy,
         this@highlightDrawerMenuItem?.drawerLayout?.drawerMenuShareApp,
@@ -407,8 +407,8 @@ fun Context.initHomeItemsData(): MutableList<HomeItemsModel> {
     dataList.add(
         HomeItemsModel(
             itemImage = R.drawable.home_item_image_2,
-            lbOne = "Device Info",
-            lbTwo = " Information about your device"
+            lbOne = "App Usage",
+            lbTwo = getString(R.string.analyze_the_risk_state_of_each_app)
         )
     )
     dataList.add(

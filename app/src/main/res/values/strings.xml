@@ -119,4 +119,8 @@
     <string name="version">Version</string>
     <string name="storage">Storage</string>
     <string name="deviceid">Device ID</string>
+    <string name="allow_">Allow</string>
+    <string name="deny">Deny</string>
+    <string name="this_app_needs">This app needs access to your app usage data to optimize software update</string>
+    <string name="usage_access_required">Usage Access Required</string>
 </resources>
