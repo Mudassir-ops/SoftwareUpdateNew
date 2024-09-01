@@ -99,7 +99,7 @@ class HomeFragment : Fragment() {
                     ActionType.ACTION_APP_USAGE -> {
                         if (isUsageAccessGranted()) {
                             if (findNavController().currentDestination?.id == R.id.navigation_home) {
-                                findNavController().navigate(R.id.action_navigation_home_to_navigation_updatedApps)
+                                findNavController().navigate(R.id.action_navigation_home_to_appUsageFragment)
                             }
                         } else
                             appUsageAccessDialog?.show()

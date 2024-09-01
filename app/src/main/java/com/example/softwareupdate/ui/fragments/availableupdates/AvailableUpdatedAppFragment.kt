@@ -24,7 +24,6 @@ import kotlinx.coroutines.flow.onEach
 
 @AndroidEntryPoint
 class AvailableUpdatedAppFragment : Fragment() {
-
     private val viewModel by viewModels<AvailableUpdatedAppViewModel>()
     private var _binding: FragmentAvailableUpdatedAppBinding? = null
     private val binding get() = _binding

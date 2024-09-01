@@ -46,6 +46,9 @@
         <action
             android:id="@+id/action_navigation_home_to_deviceInfoFragment"
             app:destination="@id/deviceInfoFragment" />
+        <action
+            android:id="@+id/action_navigation_home_to_appUsageFragment"
+            app:destination="@id/appUsageFragment" />
     </fragment>
 
     <fragment
@@ -143,6 +146,11 @@
         android:name="com.example.softwareupdate.ui.fragments.deviceInfo.DeviceInfoFragment"
         android:label="fragment_device_info"
         tools:layout="@layout/fragment_device_info" />
+    <fragment
+        android:id="@+id/appUsageFragment"
+        android:name="com.example.softwareupdate.ui.fragments.appUsage.AppUsageFragment"
+        android:label="fragment_app_usage"
+        tools:layout="@layout/fragment_app_usage" />
 
 
 </navigation>

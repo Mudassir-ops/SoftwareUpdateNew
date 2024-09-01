@@ -27,6 +27,5 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/btn_header_back_arrow"
         app:layout_constraintTop_toTopOf="parent"
-
         />
 </androidx.constraintlayout.widget.ConstraintLayout>
