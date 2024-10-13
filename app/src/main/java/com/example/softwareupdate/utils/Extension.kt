@@ -329,38 +329,26 @@ fun FragmentHomeBinding?.initDrawerClicks(colorString: String, clickCallback: (I
                 clickedViewPosition = 0, colorString
             )
         }
-//        drawerMenuLanguage.setOnClickListener {
-//            clickCallback.invoke(1)
-//            this@initDrawerClicks.highlightDrawerMenuItem(
-//                clickedViewPosition = 1, colorString
-//            )
-//        }
-//        drawerMenuChangeTheme.setOnClickListener {
-//            clickCallback.invoke(2)
-//            this@initDrawerClicks.highlightDrawerMenuItem(
-//                clickedViewPosition = 2, colorString
-//            )
-//        }
         drawerMenuPrivacyPolicy.setOnClickListener {
-            clickCallback.invoke(3)
+            clickCallback.invoke(1)
             this@initDrawerClicks.highlightDrawerMenuItem(
                 clickedViewPosition = 1, colorString
             )
         }
         drawerMenuShareApp.setOnClickListener {
-            clickCallback.invoke(4)
+            clickCallback.invoke(2)
             this@initDrawerClicks.highlightDrawerMenuItem(
                 clickedViewPosition = 2, colorString
             )
         }
         drawerMenuMoreApp.setOnClickListener {
-            clickCallback.invoke(5)
+            clickCallback.invoke(3)
             this@initDrawerClicks.highlightDrawerMenuItem(
                 clickedViewPosition = 3, colorString
             )
         }
         drawerMenuRateUs.setOnClickListener {
-            clickCallback.invoke(6)
+            clickCallback.invoke(4)
             this@initDrawerClicks.highlightDrawerMenuItem(
                 clickedViewPosition = 4, colorString
             )

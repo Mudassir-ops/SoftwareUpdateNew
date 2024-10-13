@@ -20,6 +20,9 @@ android {
         versionName = "1.0"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+
+        setProperty("archivesBaseName", "SoftwareUpdate-v$versionCode($versionName)")
+
     }
 
     buildFeatures {

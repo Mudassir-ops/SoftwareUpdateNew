@@ -23,6 +23,7 @@ import androidx.lifecycle.flowWithLifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import com.example.softwareupdate.R
+import com.example.softwareupdate.RateUsDialog
 import com.example.softwareupdate.adapters.home.HomeScreensItemsAdapter
 import com.example.softwareupdate.databinding.FragmentHomeBinding
 import com.example.softwareupdate.service.CheckSoftwareService
@@ -62,11 +63,15 @@ class HomeFragment : Fragment() {
     private var homeScreensItemsAdapter: HomeScreensItemsAdapter? = null
     private var isBtnStart = false
     private var exitDialog: AlertDialog? = null
+    private var rateUsDialog: RateUsDialog?=null
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         sharedViewModel.invokePrivacyManagerAppsUseCase()
         sharedViewModelSystemApps.invokeAllSysAppsUseCase()
+        rateUsDialog = RateUsDialog(activity?:return)
+
         homeScreensItemsAdapter = HomeScreensItemsAdapter(
             callback = { actionType: ActionType ->
                 when (actionType) {
@@ -260,11 +265,10 @@ class HomeFragment : Fragment() {
         this?.mainDrawerLayout?.closeDrawer(GravityCompat.START)
         when (clickedViewIndex) {
             0 -> this?.mainDrawerLayout?.closeDrawer(GravityCompat.START)
-            // 1 -> navigateToLanguage()
             1 -> activity?.privacyPolicyUrl()
             2 -> activity?.shareApp()
             3 -> activity?.moreApps()
-            4 -> activity?.rateUs()
+            4 -> rateUsDialog?.show()
 
             // Add more cases as needed
         }

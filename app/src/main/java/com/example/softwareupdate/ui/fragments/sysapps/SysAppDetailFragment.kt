@@ -1,6 +1,7 @@
 package com.example.softwareupdate.ui.fragments.sysapps
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -31,6 +32,7 @@ class SysAppDetailFragment : Fragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         mySysAppsEntity = arguments?.parcelable(AppConstants.SYSTEM_APPS_PACKAGE)
+        Log.e("SysAppDetailFragment", "onCreate: systemApps ${mySysAppsEntity?.pName}", )
         activity?.onBackPressedDispatcher?.addCallback(this, object : OnBackPressedCallback(true) {
             override fun handleOnBackPressed() {
                 findNavController().navigateUp()

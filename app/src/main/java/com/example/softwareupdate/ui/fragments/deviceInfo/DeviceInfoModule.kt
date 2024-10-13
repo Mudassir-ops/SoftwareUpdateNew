@@ -17,7 +17,6 @@ import javax.inject.Inject
 
 class DeviceInfoModule @Inject constructor(@ApplicationContext private val context: Context) {
 
-    @RequiresApi(Build.VERSION_CODES.S)
     @SuppressLint("HardwareIds")
     fun getDeviceInfo() : Flow<Response<DeviceInfo>> = flow{
 
@@ -51,10 +50,13 @@ class DeviceInfoModule @Inject constructor(@ApplicationContext private val conte
                         context.contentResolver,
                         Settings.Secure.ANDROID_ID
                     )
-                } else {
-                    val manager= context.getSystemService(Context.DEVICE_POLICY_SERVICE) as DevicePolicyManager
+                } else if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {  // API 30
+                    val manager = context.getSystemService(Context.DEVICE_POLICY_SERVICE) as DevicePolicyManager
                     manager.enrollmentSpecificId
+                } else {
+                    "N/A"  // Fallback for older devices
                 }
+
             val info = DeviceInfo(
                 deviceName = deviceName,
                 deviceModel = deviceModel,

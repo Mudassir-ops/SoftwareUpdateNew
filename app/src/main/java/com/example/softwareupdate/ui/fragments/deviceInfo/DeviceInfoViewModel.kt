@@ -12,7 +12,6 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
-@RequiresApi(Build.VERSION_CODES.S)
 @HiltViewModel
 class DeviceInfoViewModel @Inject constructor(
     deviceInfoModule: DeviceInfoModule

@@ -4,16 +4,26 @@ import androidx.appcompat.app.AlertDialog
 import android.app.Activity
 import android.app.ActivityManager
 import android.content.Context
+import android.app.AppOpsManager
+
 import android.content.Intent
 import android.net.Uri
 import android.os.SystemClock
 import android.view.View
 import android.widget.TextView
 import android.widget.Toast
+import androidx.annotation.RequiresApi
 import com.example.softwareupdate.R
 import java.text.SimpleDateFormat
 import java.util.Date
 import java.util.Locale
+import android.app.usage.StorageStats
+import android.app.usage.StorageStatsManager
+import android.content.pm.PackageManager
+import android.os.Build
+import android.os.UserHandle
+import android.util.Log
+import java.text.DecimalFormat
 
 
 fun Context.showToast(message: String) {
@@ -138,5 +148,8 @@ fun currentDateAndTime(context: Context,textView: TextView) {
     val dateTimeString = "$formattedTime\n$formattedDate"
     textView.text = dateTimeString
 }
+
+
+
 
 
