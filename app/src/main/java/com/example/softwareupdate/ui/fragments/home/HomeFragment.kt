@@ -26,6 +26,7 @@ import com.example.softwareupdate.R
 import com.example.softwareupdate.RateUsDialog
 import com.example.softwareupdate.adapters.home.HomeScreensItemsAdapter
 import com.example.softwareupdate.databinding.FragmentHomeBinding
+import com.example.softwareupdate.dialog.ExitDialog
 import com.example.softwareupdate.service.CheckSoftwareService
 import com.example.softwareupdate.ui.fragments.appPrivacy.AppPrivacyRiskManagerViewModel
 import com.example.softwareupdate.ui.fragments.sysapps.AllSystemAppsViewModel
@@ -64,6 +65,7 @@ class HomeFragment : Fragment() {
     private var isBtnStart = false
     private var exitDialog: AlertDialog? = null
     private var rateUsDialog: RateUsDialog?=null
+    private var exitDialogNew:ExitDialog?=null
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -71,6 +73,7 @@ class HomeFragment : Fragment() {
         sharedViewModel.invokePrivacyManagerAppsUseCase()
         sharedViewModelSystemApps.invokeAllSysAppsUseCase()
         rateUsDialog = RateUsDialog(activity?:return)
+        exitDialogNew = ExitDialog(activity =activity?:return)
 
         homeScreensItemsAdapter = HomeScreensItemsAdapter(
             callback = { actionType: ActionType ->
@@ -109,9 +112,10 @@ class HomeFragment : Fragment() {
         val callback: OnBackPressedCallback = object :
             OnBackPressedCallback(true) {
             override fun handleOnBackPressed() {
-                if (!isDialogVisible()) {
-                    showExitDialog()
-                }
+//                if (!isDialogVisible()) {
+//                    showExitDialog()
+//                }
+                exitDialogNew?.show()
             }
         }
         activity?.onBackPressedDispatcher?.addCallback(this, callback)
@@ -128,7 +132,7 @@ class HomeFragment : Fragment() {
             setUpButtonSystemApplications()
             setUpStartButton()
             setUpHeaderLayout()
-            initDrawerClicks(colorString = "#F21100") { clickedViewIndex ->
+            initDrawerClicks(context?:return,colorString = "#F21100") { clickedViewIndex ->
                 handleDrawerClick(clickedViewIndex)
             }
             setUpRecyclerView()
@@ -241,6 +245,7 @@ class HomeFragment : Fragment() {
             }
         }
     }
+
 
     private fun navigateToApiVersions() {
         if (findNavController().currentDestination?.id == R.id.navigation_home) {
