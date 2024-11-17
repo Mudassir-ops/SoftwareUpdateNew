@@ -13,19 +13,16 @@ import androidx.navigation.fragment.findNavController
 import com.example.softwareupdate.R
 import com.example.softwareupdate.databinding.FragmentSplashBinding
 import com.example.softwareupdate.ui.fragments.home.HomeViewModel
+import com.example.softwareupdate.utils.AppConstants.IF_FIRST_TIME_OPEN_APP
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.Dispatchers.IO
 
 
 @AndroidEntryPoint
 class SplashFragment : Fragment() {
-
-    private val viewModel by viewModels<SplashViewModel>()
-
     private var animator: ValueAnimator? = null
     private var _binding: FragmentSplashBinding? = null
     private val binding get() = _binding
-    private val ioDispatcher = IO
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
     ): View? {
@@ -35,8 +32,8 @@ class SplashFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        IF_FIRST_TIME_OPEN_APP = true
         binding?.apply {
-            viewModel.deleteAllTables(ioDispatcher = ioDispatcher)
             animator = ValueAnimator.ofInt(0, progressHorizontal.max)
             animator?.duration = 3000
             animator?.addUpdateListener { animation ->
@@ -84,8 +81,6 @@ class SplashFragment : Fragment() {
         animator?.resume()
     }
 
-    fun deleteMyOldTables() {
 
-    }
 }
 

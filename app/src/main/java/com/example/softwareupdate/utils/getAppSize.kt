@@ -20,11 +20,12 @@ fun getAppSize(context: Context, packageName: String): String {
     }
 }
 
-// For Android 8.0 (Oreo) and above
+
 @RequiresApi(Build.VERSION_CODES.O)
 private fun getAppSizeOreoAndAbove(context: Context, packageName: String): String {
     try {
-        val storageStatsManager = context.getSystemService(Context.STORAGE_STATS_SERVICE) as StorageStatsManager
+        val storageStatsManager =
+            context.getSystemService(Context.STORAGE_STATS_SERVICE) as StorageStatsManager
         val storageManager = context.getSystemService(Context.STORAGE_SERVICE) as StorageManager
 
         // Log UUID for debugging
@@ -50,7 +51,8 @@ private fun getAppSizeOreoAndAbove(context: Context, packageName: String): Strin
             android.os.Process.myUserHandle()
         )
 
-        val totalBytes = appStorageStats.appBytes + appStorageStats.cacheBytes + appStorageStats.dataBytes
+        val totalBytes =
+            appStorageStats.appBytes + appStorageStats.cacheBytes + appStorageStats.dataBytes
         return formatSize(totalBytes)
     } catch (e: Exception) {
         Log.e("GetAppSize", "Error getting app size: ", e)
@@ -58,9 +60,6 @@ private fun getAppSizeOreoAndAbove(context: Context, packageName: String): Strin
     }
 }
 
-
-// For Android below 8.0
-@Suppress("DEPRECATION")
 private fun getAppSizeBelowOreo(context: Context, packageName: String): String {
     try {
         val packageManager = context.packageManager
@@ -73,10 +72,4 @@ private fun getAppSizeBelowOreo(context: Context, packageName: String): String {
         e.printStackTrace()
         return "Unable to get size"
     }
-}
-
-// Format size from bytes to MB
- fun formatSize(sizeInBytes: Int): String {
-    val sizeInMB = sizeInBytes / (1024 * 1024)
-    return "$sizeInMB MB"
 }

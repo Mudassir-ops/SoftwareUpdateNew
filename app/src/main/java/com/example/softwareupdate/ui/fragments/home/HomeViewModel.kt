@@ -1,5 +1,6 @@
 package com.example.softwareupdate.ui.fragments.home
 
+import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.softwareupdate.data.PackageInfoEntity
@@ -40,12 +41,7 @@ class HomeViewModel @Inject constructor(private val updateUseCase: CheckAppUpdat
         state.value = UpdatedAppFragmentState.ShowToast(message)
     }
 
-    init {
-        getAllUpdatedApp()
-        getRowCount()
-    }
-
-    private fun getAllUpdatedApp() {
+    fun getAllUpdatedApp() {
         viewModelScope.launch {
             updateUseCase.getAllUpdatedApp().onStart {
                 setLoading()
@@ -64,9 +60,10 @@ class HomeViewModel @Inject constructor(private val updateUseCase: CheckAppUpdat
         }
     }
 
-    private fun getRowCount() {
+    fun getRowCount() {
         viewModelScope.launch {
             withContext(IO) {
+                Log.d("getRowCount", "getRowCount: ${updateUseCase.getRowCount()}")
                 _appCount.value = updateUseCase.getRowCount()
             }
         }

@@ -10,6 +10,7 @@ import com.example.softwareupdate.data.PackageInfoEntity
 import com.example.softwareupdate.di.repositories.NotificationRepository
 import com.example.softwareupdate.di.usecase.CheckAppUpdateUseCase
 import com.example.softwareupdate.utils.AppConstants.DURATION_MILLIS
+import com.example.softwareupdate.utils.AppConstants.IF_FIRST_TIME_OPEN_APP
 import com.example.softwareupdate.utils.drawableToByteArray
 import com.example.softwareupdate.utils.event.UpdateEvent
 import dagger.hilt.android.AndroidEntryPoint
@@ -39,6 +40,10 @@ class CheckSoftwareService : Service(), CoroutineScope {
     private val serviceScope = CoroutineScope(IO)
     private var timer: Timer? = null
 
+    companion object {
+        var isRunning = false
+    }
+
     override fun onCreate() {
         super.onCreate()
         val notificationBuilder = notificationRepository.buildNotification()
@@ -58,8 +63,7 @@ class CheckSoftwareService : Service(), CoroutineScope {
             startForeground(1, notification)
         }
         startTimer()
-
-
+        isRunning = true
     }
 
     private fun startTimer() {
@@ -122,6 +126,8 @@ class CheckSoftwareService : Service(), CoroutineScope {
         timer?.cancel()
         job.cancel()
         timer = null
+        IF_FIRST_TIME_OPEN_APP = false
+        isRunning = false
     }
 
     override fun onBind(intent: Intent): IBinder? = null

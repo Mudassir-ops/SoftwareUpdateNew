@@ -129,4 +129,5 @@
     <string name="_13_min">13_min\n</string>
     <string name="app_name_">app_name\n</string>
     <string name="feedback">Feedback</string>
+    <string name="tap_to_start_scanning">  TAP TO\n   START</string>
 </resources>

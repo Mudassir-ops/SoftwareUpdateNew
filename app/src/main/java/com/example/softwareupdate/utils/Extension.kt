@@ -43,6 +43,8 @@ import java.io.ByteArrayOutputStream
 import java.io.File
 import android.net.ConnectivityManager
 import android.net.NetworkCapabilities
+import android.util.TypedValue
+import android.view.Gravity
 import android.widget.Toast
 import java.text.DecimalFormat
 import kotlin.math.log10
@@ -199,17 +201,16 @@ fun Context?.openPlayStoreForApp(packageName: String?) {
     }
 }
 
-fun PackageManager?.getPackageInfoCompat(packageName: String, flags: Int = 0): PackageInfo? =
-    try {
-        if (SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
-            this?.getPackageInfo(packageName, PackageManager.PackageInfoFlags.of(flags.toLong()))
-        } else {
-            (this?.getPackageInfo(packageName, flags))
-        }
-    } catch (e: PackageManager.NameNotFoundException) {
-        // Handle the case where the package is not found
-        null
+fun PackageManager?.getPackageInfoCompat(packageName: String, flags: Int = 0): PackageInfo? = try {
+    if (SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+        this?.getPackageInfo(packageName, PackageManager.PackageInfoFlags.of(flags.toLong()))
+    } else {
+        (this?.getPackageInfo(packageName, flags))
     }
+} catch (e: PackageManager.NameNotFoundException) {
+    // Handle the case where the package is not found
+    null
+}
 
 fun Context?.getPermissionInfo(permission: String): PermissionInfo? {
     try {
@@ -274,6 +275,14 @@ fun AppCompatTextView.setGradientTextShader(context: Context?, text: String) {
     )
     paint.shader = textShader
     this.text = text
+    textAlignment = View.TEXT_ALIGNMENT_INHERIT
+//    textSize = if (text == context?.getString(R.string.tap_to_start_scanning)) {
+//        val textSizeInSp = resources.getDimension(com.intuit.ssp.R.dimen._6ssp)
+//        textSizeInSp
+//    } else {
+//        val textSizeInSp = resources.getDimension(com.intuit.ssp.R.dimen._8ssp)
+//        textSizeInSp
+//    }
 }
 
 fun Drawable.drawableToByteArray(): ByteArray {
@@ -322,8 +331,7 @@ fun formatSize(sizeInBytes: Long): String {
 }
 
 fun FragmentHomeBinding?.initDrawerClicks(
-    colorString: String,
-    clickCallback: (Int) -> Unit
+    colorString: String, clickCallback: (Int) -> Unit
 ) {
     this@initDrawerClicks?.drawerLayout?.apply {
         this@initDrawerClicks.highlightDrawerMenuItem(
@@ -489,7 +497,7 @@ fun Context.isInternetAvailable(): Boolean {
 
     val network = connectivityManager.activeNetwork ?: return false
     val networkCapabilities = connectivityManager.getNetworkCapabilities(network) ?: return false
-    return networkCapabilities.hasTransport(NetworkCapabilities.TRANSPORT_WIFI) ||
-            networkCapabilities.hasTransport(NetworkCapabilities.TRANSPORT_CELLULAR) ||
-            networkCapabilities.hasTransport(NetworkCapabilities.TRANSPORT_ETHERNET)
+    return networkCapabilities.hasTransport(NetworkCapabilities.TRANSPORT_WIFI) || networkCapabilities.hasTransport(
+        NetworkCapabilities.TRANSPORT_CELLULAR
+    ) || networkCapabilities.hasTransport(NetworkCapabilities.TRANSPORT_ETHERNET)
 }
