@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+
+    <View
+        android:id="@+id/topView"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHeight_percent="0.5"
+        android:layout_margin="@dimen/_10sdp"
+        android:background="@drawable/round_storke_gradient_extra_corner"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/icAccessUsage"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_marginTop="@dimen/_20sdp"
+        app:layout_constraintBottom_toTopOf="@id/txtAccessUsage"
+        app:layout_constraintEnd_toEndOf="@id/topView"
+        app:layout_constraintStart_toStartOf="@id/topView"
+        app:layout_constraintTop_toTopOf="@id/topView"
+        app:srcCompat="@drawable/icon" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/txtAccessUsage"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/_10sdp"
+        app:layout_constraintTop_toBottomOf="@id/icAccessUsage"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:textColor="@color/white"
+        app:layout_constraintBottom_toTopOf="@id/txtAccessUsageDescription"
+        android:text="@string/usage_access_required"
+        android:textSize="@dimen/_14sdp"
+        android:fontFamily="@font/poppins_semibold"/>
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/txtAccessUsageDescription"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/txtAccessUsage"
+        android:gravity="center"
+        app:layout_constraintWidth_percent="0.9"
+        android:paddingHorizontal="@dimen/_10sdp"
+        android:layout_marginHorizontal="@dimen/_5sdp"
+        android:textColor="@color/white"
+        android:layout_marginVertical="@dimen/_10sdp"
+        app:layout_constraintStart_toStartOf="@id/topView"
+        app:layout_constraintBottom_toTopOf="@id/btnDeny"
+        app:layout_constraintEnd_toEndOf="@id/topView"
+        android:text="@string/this_app_needs"
+        android:textSize="@dimen/_11sdp"
+        android:fontFamily="@font/poppins"/>
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btnDeny"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/bg_device_info"
+        android:text="@string/deny"
+        android:textColor="@color/white"
+        android:textAllCaps="false"
+        android:layout_marginVertical="@dimen/_10sdp"
+        android:layout_marginHorizontal="@dimen/_10sdp"
+        app:layout_constraintHorizontal_chainStyle="packed"
+        app:layout_constraintEnd_toStartOf="@id/btnAllow"
+        app:layout_constraintBottom_toBottomOf="@id/topView"
+        app:layout_constraintTop_toBottomOf="@id/txtAccessUsageDescription"
+        app:layout_constraintStart_toStartOf="@id/topView"/>
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btnAllow"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/btn_shape_gradient"
+        android:text="@string/allow_"
+        android:textColor="@color/white"
+        android:textAllCaps="false"
+        app:layout_constraintBottom_toBottomOf="@id/btnDeny"
+        app:layout_constraintStart_toEndOf="@id/btnDeny"
+        app:layout_constraintEnd_toEndOf="@id/topView"
+        app:layout_constraintTop_toTopOf="@id/btnDeny"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -2,6 +2,7 @@ package com.example.softwareupdate.ui.fragments.home
 
 import android.Manifest
 import android.app.AlertDialog
+import android.app.AppOpsManager
 import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
@@ -26,6 +27,7 @@ import com.example.softwareupdate.R
 import com.example.softwareupdate.RateUsDialog
 import com.example.softwareupdate.adapters.home.HomeScreensItemsAdapter
 import com.example.softwareupdate.databinding.FragmentHomeBinding
+import com.example.softwareupdate.dialog.AppUsageAccess
 import com.example.softwareupdate.dialog.ExitDialog
 import com.example.softwareupdate.service.CheckSoftwareService
 import com.example.softwareupdate.ui.fragments.appPrivacy.AppPrivacyRiskManagerViewModel
@@ -39,6 +41,7 @@ import com.example.softwareupdate.utils.all_extension.showToast
 import com.example.softwareupdate.utils.all_extension.toast
 import com.example.softwareupdate.utils.calculateProgress
 import com.example.softwareupdate.utils.event.UpdateEvent
+import com.example.softwareupdate.utils.feedBackWithEmail
 import com.example.softwareupdate.utils.handleSystemUpdate
 import com.example.softwareupdate.utils.initDrawerClicks
 import com.example.softwareupdate.utils.initHomeItemsData
@@ -64,16 +67,32 @@ class HomeFragment : Fragment() {
     private var homeScreensItemsAdapter: HomeScreensItemsAdapter? = null
     private var isBtnStart = false
     private var exitDialog: AlertDialog? = null
-    private var rateUsDialog: RateUsDialog?=null
-    private var exitDialogNew:ExitDialog?=null
+    private var rateUsDialog: RateUsDialog? = null
+    private var exitDialogNew: ExitDialog? = null
+
+    private var appUsageAccessDialog: AppUsageAccess? = null
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        appUsageAccessDialog = AppUsageAccess(requireActivity(), callback = { accessGranted ->
+            if (accessGranted) {
+                if (isUsageAccessGranted()) {
+                    activity?.showToast("Permission granted. Proceeding with functionality.")
+                } else {
+                    // Permission not granted, guide user to settings
+                    activity?.showToast("Permission not granted. Please enable it in settings.")
+                }
+            } else {
+                // Handle case when user denies access
+                activity?.showToast("Permission denied.")
+            }
+
+        })
         sharedViewModel.invokePrivacyManagerAppsUseCase()
         sharedViewModelSystemApps.invokeAllSysAppsUseCase()
-        rateUsDialog = RateUsDialog(activity?:return)
-        exitDialogNew = ExitDialog(activity =activity?:return)
+        rateUsDialog = RateUsDialog(activity ?: return)
+        exitDialogNew = ExitDialog(activity = activity ?: return)
 
         homeScreensItemsAdapter = HomeScreensItemsAdapter(
             callback = { actionType: ActionType ->
@@ -82,9 +101,15 @@ class HomeFragment : Fragment() {
                         findNavController().navigate(R.id.action_navigation_home_to_app_privacy_manager)
                     }
 
-                    ActionType.ACTION_APP_USAGE -> if (findNavController().currentDestination?.id == R.id.navigation_home) {
-                        // findNavController().navigate(R.id.action_navigation_home_to_navigation_updatedApps)
-                        findNavController().navigate(R.id.action_navigation_home_to_deviceInfoFragment)
+                    ActionType.ACTION_APP_USAGE -> {
+                        if (isUsageAccessGranted()) {
+                            if (findNavController().currentDestination?.id == R.id.navigation_home) {
+                                findNavController().navigate(R.id.action_navigation_home_to_navigation_updatedApps)
+                            }
+                        } else
+                            appUsageAccessDialog?.show()
+
+
                     }
 
                     ActionType.ACTION_APP_UNINSTALL -> if (findNavController().currentDestination?.id == R.id.navigation_home) {
@@ -132,7 +157,9 @@ class HomeFragment : Fragment() {
             setUpButtonSystemApplications()
             setUpStartButton()
             setUpHeaderLayout()
-            initDrawerClicks(context?:return,colorString = "#F21100") { clickedViewIndex ->
+            initDrawerClicks(
+                colorString = "#F21100"
+            ) { clickedViewIndex ->
                 handleDrawerClick(clickedViewIndex)
             }
             setUpRecyclerView()
@@ -246,7 +273,6 @@ class HomeFragment : Fragment() {
         }
     }
 
-
     private fun navigateToApiVersions() {
         if (findNavController().currentDestination?.id == R.id.navigation_home) {
             findNavController().navigate(R.id.action_navigation_home_to_navigation_api_versions)
@@ -270,18 +296,18 @@ class HomeFragment : Fragment() {
         this?.mainDrawerLayout?.closeDrawer(GravityCompat.START)
         when (clickedViewIndex) {
             0 -> this?.mainDrawerLayout?.closeDrawer(GravityCompat.START)
-            1 -> activity?.privacyPolicyUrl()
-            2 -> activity?.shareApp()
-            3 -> activity?.moreApps()
-            4 -> rateUsDialog?.show()
-
-            // Add more cases as needed
+            1 -> navigateToDeviceInfo()
+            2 -> activity?.privacyPolicyUrl()
+            3 -> activity?.shareApp()
+            4 -> activity?.moreApps()
+            5 -> activity?.rateUs()
+            6 -> context?.feedBackWithEmail("Feedback", "Any Feedback", "shabirehtisham8@gmail.com")
         }
     }
 
-    private fun navigateToLanguage() {
+    private fun navigateToDeviceInfo() {
         if (findNavController().currentDestination?.id == R.id.navigation_home) {
-            findNavController().navigate(R.id.action_navigation_home_to_navigation_language)
+            findNavController().navigate(R.id.action_navigation_home_to_deviceInfoFragment)
         }
     }
 
@@ -391,6 +417,21 @@ class HomeFragment : Fragment() {
         exitDialog?.getButton(AlertDialog.BUTTON_NEGATIVE)?.setTextColor(Color.RED)
 
 
+    }
+
+    private fun isUsageAccessGranted(): Boolean {
+        val appOpsManager = context?.getSystemService(Context.APP_OPS_SERVICE) as? AppOpsManager
+        val applicationInfo = context?.applicationInfo
+        val mode = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
+            appOpsManager?.checkOpNoThrow(
+                AppOpsManager.OPSTR_GET_USAGE_STATS,
+                applicationInfo?.uid ?: return false,
+                context?.packageName ?: return false
+            )
+        } else {
+            AppOpsManager.MODE_IGNORED
+        }
+        return mode == AppOpsManager.MODE_ALLOWED
     }
 }
 
