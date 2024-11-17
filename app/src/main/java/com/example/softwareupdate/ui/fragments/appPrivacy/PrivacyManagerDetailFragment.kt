@@ -1,6 +1,13 @@
 package com.example.softwareupdate.ui.fragments.appPrivacy
 
+import android.app.AppOpsManager
+import android.content.Context
+import android.content.Intent
+import android.content.pm.PackageManager
+import android.os.Build
 import android.os.Bundle
+import android.provider.Settings
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -12,6 +19,7 @@ import com.example.softwareupdate.adapters.privacymanager.PrivacyManagerEntity
 import com.example.softwareupdate.databinding.FragmentPrivacyManagerDetailBinding
 import com.example.softwareupdate.utils.AppConstants.PRIVACY_MANGER_OBJECT
 import com.example.softwareupdate.utils.all_extension.gone
+import com.example.softwareupdate.utils.getAppSize
 import com.example.softwareupdate.utils.parcelable
 
 class PrivacyManagerDetailFragment : Fragment() {
@@ -37,13 +45,32 @@ class PrivacyManagerDetailFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        val appName = privacyManagerEntity?.appName
+        if (appName != null) {
+            if (hasUsageStatsPermission(requireContext())) {
+                val packageName = getPackageNameFromAppName(requireContext(), appName)
+                if (packageName != null) {
+                    val appSize = getAppSize(requireContext(), packageName)
+                    binding?.tvAppSize?.text = appSize
+                    Log.d("AppSize", "Size of app $appName ($packageName): $appSize")
+                } else {
+                    Log.e("AppSize", "Package not found for app name: $appName")
+                }
+            } else {
+                // Request permission if not granted
+                Log.e("AppSize", "Usage stats permission not granted. Requesting permission.")
+                requestUsageStatsPermission(requireContext())
+            }
+        }
+
         binding?.apply {
             headerLayout.btnHeaderBackArrow.setOnClickListener {
                 findNavController().navigateUp()
             }
             ivAppIcon.setImageDrawable(privacyManagerEntity?.icon)
             tvAppName.text = privacyManagerEntity?.appName
-            tvAppSize.text = "20Mb"
+
             headerLayout.tvHeaderVersion.gone()
         }
         setupVersionsRecyclerView()
@@ -69,5 +96,39 @@ class PrivacyManagerDetailFragment : Fragment() {
                 }
             }
         }
+
+
     }
+
+    private fun getPackageNameFromAppName(context: Context, appName: String): String? {
+        val pm = context.packageManager
+        val installedApps = pm.getInstalledApplications(PackageManager.GET_META_DATA)
+
+        // Iterate through the list of installed apps to find the matching app name
+        for (app in installedApps) {
+            val label = pm.getApplicationLabel(app).toString()
+            if (label == appName) {
+                return app.packageName // Return the matching package name
+            }
+        }
+        return null // Return null if the app name doesn't match any package
+    }
+
+    fun hasUsageStatsPermission(context: Context): Boolean {
+        val appOps = context.getSystemService(Context.APP_OPS_SERVICE) as AppOpsManager
+        val mode = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
+            appOps.unsafeCheckOpNoThrow(AppOpsManager.OPSTR_GET_USAGE_STATS, android.os.Process.myUid(), context.packageName)
+        } else {
+            appOps.checkOpNoThrow(AppOpsManager.OPSTR_GET_USAGE_STATS, android.os.Process.myUid(), context.packageName)
+        }
+        return mode == AppOpsManager.MODE_ALLOWED
+    }
+
+    // Function to request Usage Stats permission by directing user to settings
+    fun requestUsageStatsPermission(context: Context) {
+        val intent = Intent(Settings.ACTION_USAGE_ACCESS_SETTINGS)
+        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+        context.startActivity(intent)
+    }
+
 }

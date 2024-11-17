@@ -25,9 +25,11 @@ import androidx.lifecycle.flowWithLifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import com.example.softwareupdate.R
+import com.example.softwareupdate.RateUsDialog
 import com.example.softwareupdate.adapters.home.HomeScreensItemsAdapter
 import com.example.softwareupdate.databinding.FragmentHomeBinding
 import com.example.softwareupdate.dialog.AppUsageAccess
+import com.example.softwareupdate.dialog.ExitDialog
 import com.example.softwareupdate.service.CheckSoftwareService
 import com.example.softwareupdate.ui.fragments.appPrivacy.AppPrivacyRiskManagerViewModel
 import com.example.softwareupdate.ui.fragments.sysapps.AllSystemAppsViewModel
@@ -65,6 +67,9 @@ class HomeFragment : Fragment() {
     private var homeScreensItemsAdapter: HomeScreensItemsAdapter? = null
     private var isBtnStart = false
     private var exitDialog: AlertDialog? = null
+    private var rateUsDialog: RateUsDialog?=null
+    private var exitDialogNew:ExitDialog?=null
+
     private var appUsageAccessDialog: AppUsageAccess? = null
 
 
@@ -89,6 +94,9 @@ class HomeFragment : Fragment() {
         })
         sharedViewModel.invokePrivacyManagerAppsUseCase()
         sharedViewModelSystemApps.invokeAllSysAppsUseCase()
+        rateUsDialog = RateUsDialog(activity?:return)
+        exitDialogNew = ExitDialog(activity =activity?:return)
+
         homeScreensItemsAdapter = HomeScreensItemsAdapter(
             callback = { actionType: ActionType ->
                 when (actionType) {
@@ -132,9 +140,10 @@ class HomeFragment : Fragment() {
         val callback: OnBackPressedCallback = object :
             OnBackPressedCallback(true) {
             override fun handleOnBackPressed() {
-                if (!isDialogVisible()) {
-                    showExitDialog()
-                }
+//                if (!isDialogVisible()) {
+//                    showExitDialog()
+//                }
+                exitDialogNew?.show()
             }
         }
         activity?.onBackPressedDispatcher?.addCallback(this, callback)
@@ -191,7 +200,6 @@ class HomeFragment : Fragment() {
     private fun FragmentHomeBinding.setUpButtonSystemUpdate() {
         btnSystemUpdate.setOnClickListener {
             activity?.handleSystemUpdate()
-
         }
     }
 
@@ -285,15 +293,21 @@ class HomeFragment : Fragment() {
             }.launchIn(viewLifecycleOwner.lifecycleScope)
     }
 
+//    0 -> this?.mainDrawerLayout?.closeDrawer(GravityCompat.START)
+//    1 -> navigateToDeviceInfo()
+//    2 -> activity?.privacyPolicyUrl()
+//    3 -> activity?.shareApp()
+//    4 -> activity?.moreApps()
+//    5 -> activity?.rateUs()
     private fun FragmentHomeBinding?.handleDrawerClick(clickedViewIndex: Int) {
         this?.mainDrawerLayout?.closeDrawer(GravityCompat.START)
         when (clickedViewIndex) {
             0 -> this?.mainDrawerLayout?.closeDrawer(GravityCompat.START)
-            1 -> navigateToDeviceInfo()
-            2 -> activity?.privacyPolicyUrl()
-            3 -> activity?.shareApp()
-            4 -> activity?.moreApps()
-            5 -> activity?.rateUs()
+            // 1 -> navigateToLanguage()
+            1 -> activity?.privacyPolicyUrl()
+            2 -> activity?.shareApp()
+            3 -> activity?.moreApps()
+            4 -> activity?.rateUs()
 
             // Add more cases as needed
         }

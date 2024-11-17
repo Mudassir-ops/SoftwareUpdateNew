@@ -318,7 +318,7 @@ fun formatSize(sizeInBytes: Long): String {
     return DecimalFormat("#,##0.#").format(sizeInBytes / 1024.0.pow(digitGroups.toDouble())) + " " + units[digitGroups]
 }
 
-fun FragmentHomeBinding?.initDrawerClicks(colorString: String, clickCallback: (Int) -> Unit) {
+fun FragmentHomeBinding?.initDrawerClicks(context:Context,colorString: String, clickCallback: (Int) -> Unit) {
     this@initDrawerClicks?.drawerLayout?.apply {
         this@initDrawerClicks.highlightDrawerMenuItem(
             clickedViewPosition = 0, colorString
@@ -342,28 +342,35 @@ fun FragmentHomeBinding?.initDrawerClicks(colorString: String, clickCallback: (I
 //            )
 //        }
         drawerMenuPrivacyPolicy.setOnClickListener {
-            clickCallback.invoke(3)
+            clickCallback.invoke(1)
+            this@initDrawerClicks.highlightDrawerMenuItem(
+                clickedViewPosition = 1, colorString
+            )
+        }
+        drawerMenuShareApp.setOnClickListener {
+            clickCallback.invoke(2)
             this@initDrawerClicks.highlightDrawerMenuItem(
                 clickedViewPosition = 2, colorString
             )
         }
-        drawerMenuShareApp.setOnClickListener {
-            clickCallback.invoke(4)
+        drawerMenuMoreApp.setOnClickListener {
+            clickCallback.invoke(3)
             this@initDrawerClicks.highlightDrawerMenuItem(
                 clickedViewPosition = 3, colorString
             )
         }
-        drawerMenuMoreApp.setOnClickListener {
-            clickCallback.invoke(5)
+        drawerMenuRateUs.setOnClickListener {
+            clickCallback.invoke(4)
             this@initDrawerClicks.highlightDrawerMenuItem(
                 clickedViewPosition = 4, colorString
             )
         }
-        drawerMenuRateUs.setOnClickListener {
-            clickCallback.invoke(6)
+        drawerMenuFeedback.setOnClickListener {
+            clickCallback.invoke(5)
             this@initDrawerClicks.highlightDrawerMenuItem(
                 clickedViewPosition = 5, colorString
             )
+            context.feedBackWithEmail("Feedback", "Any Feedback", "shabirehtisham8@gmail.com")
         }
     }
 }
@@ -378,7 +385,8 @@ fun FragmentHomeBinding?.highlightDrawerMenuItem(
         this@highlightDrawerMenuItem?.drawerLayout?.drawerMenuPrivacyPolicy,
         this@highlightDrawerMenuItem?.drawerLayout?.drawerMenuShareApp,
         this@highlightDrawerMenuItem?.drawerLayout?.drawerMenuMoreApp,
-        this@highlightDrawerMenuItem?.drawerLayout?.drawerMenuRateUs
+        this@highlightDrawerMenuItem?.drawerLayout?.drawerMenuRateUs,
+        this@highlightDrawerMenuItem?.drawerLayout?.drawerMenuFeedback
     )
     for (menuItem in 0..drawerMenuItems.size.minus(1)) {
         if (menuItem == clickedViewPosition) {
@@ -390,6 +398,21 @@ fun FragmentHomeBinding?.highlightDrawerMenuItem(
                 it.backgroundTintList = ColorStateList.valueOf(Color.TRANSPARENT)
             }
         }
+    }
+}
+
+fun Context.feedBackWithEmail(title:String,message:String,emailId:String){
+    try {
+        val emailIntent = Intent(Intent.ACTION_SENDTO)
+        emailIntent.flags  = Intent.FLAG_ACTIVITY_CLEAR_TASK
+        emailIntent.data  = Uri.parse("mailto:")
+        emailIntent.putExtra(Intent.EXTRA_EMAIL, arrayOf(emailId))
+        emailIntent.putExtra(Intent.EXTRA_SUBJECT, title)
+        emailIntent.putExtra(Intent.EXTRA_TEXT, message)
+        this.startActivity(emailIntent)
+
+    }catch (e:java.lang.Exception){
+        e.printStackTrace()
     }
 }
 
