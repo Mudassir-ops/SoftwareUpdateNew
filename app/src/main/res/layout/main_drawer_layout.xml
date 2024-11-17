@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
@@ -8,8 +7,8 @@
     <androidx.appcompat.widget.AppCompatImageView
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:rotation="0"
         android:padding="@dimen/_10sdp"
+        android:rotation="0"
         app:layout_constraintBottom_toBottomOf="@+id/header_layout"
         app:layout_constraintEnd_toEndOf="@+id/header_layout"
         app:layout_constraintStart_toStartOf="@+id/header_layout"
@@ -20,8 +19,8 @@
         android:id="@+id/header_layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:visibility="invisible"
         android:background="@drawable/drawer_header_shape"
+        android:visibility="invisible"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
@@ -195,14 +194,14 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="@dimen/_10sdp"
+            android:layout_marginTop="@dimen/_3sdp"
             android:fontFamily="@font/poppins"
             android:text="@string/home"
             android:textColor="@color/white"
             android:textSize="@dimen/_12ssp"
             android:textStyle="normal"
-            android:layout_marginTop="@dimen/_3sdp"
-            app:layout_constraintEnd_toEndOf="@id/drawer_menu_home"
             app:layout_constraintBottom_toBottomOf="@+id/iv_home"
+            app:layout_constraintEnd_toEndOf="@id/drawer_menu_home"
             app:layout_constraintStart_toEndOf="@+id/iv_home"
             app:layout_constraintTop_toTopOf="@+id/iv_home" />
 
@@ -213,12 +212,12 @@
         android:id="@+id/drawer_menu_device_info"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:visibility="visible"
         android:layout_marginHorizontal="@dimen/_10sdp"
         android:layout_marginVertical="@dimen/_8sdp"
         android:background="@drawable/drawer_item_shape"
         android:backgroundTint="@color/main_gradient_start_color"
         android:padding="@dimen/_6sdp"
+        android:visibility="visible"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/drawer_menu_home">
 
@@ -315,14 +314,14 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="@dimen/_10sdp"
+            android:layout_marginTop="@dimen/_3sdp"
             android:fontFamily="@font/poppins"
             android:text="@string/privacy_policy"
             android:textColor="@color/white"
             android:textSize="@dimen/_12ssp"
             android:textStyle="normal"
-            android:layout_marginTop="@dimen/_3sdp"
-            app:layout_constraintEnd_toEndOf="@id/drawer_menu_privacy_policy"
             app:layout_constraintBottom_toBottomOf="@+id/iv_privacy_policy"
+            app:layout_constraintEnd_toEndOf="@id/drawer_menu_privacy_policy"
             app:layout_constraintStart_toEndOf="@+id/iv_privacy_policy"
             app:layout_constraintTop_toTopOf="@+id/iv_privacy_policy" />
 
@@ -355,14 +354,14 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="@dimen/_10sdp"
+            android:layout_marginTop="@dimen/_3sdp"
             android:fontFamily="@font/poppins"
             android:text="@string/share_app"
             android:textColor="@color/white"
-            android:layout_marginTop="@dimen/_3sdp"
-            app:layout_constraintEnd_toEndOf="@id/drawer_menu_share_app"
             android:textSize="@dimen/_12ssp"
             android:textStyle="normal"
             app:layout_constraintBottom_toBottomOf="@+id/iv_share_app"
+            app:layout_constraintEnd_toEndOf="@id/drawer_menu_share_app"
             app:layout_constraintStart_toEndOf="@+id/iv_share_app"
             app:layout_constraintTop_toTopOf="@+id/iv_share_app" />
 
@@ -395,14 +394,14 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="@dimen/_10sdp"
+            android:layout_marginTop="@dimen/_3sdp"
             android:fontFamily="@font/poppins"
             android:text="@string/more_apps_ad"
             android:textColor="@color/white"
             android:textSize="@dimen/_12ssp"
-            android:layout_marginTop="@dimen/_3sdp"
-            app:layout_constraintEnd_toEndOf="@id/drawer_menu_more_app"
             android:textStyle="normal"
             app:layout_constraintBottom_toBottomOf="@+id/iv_more_app"
+            app:layout_constraintEnd_toEndOf="@id/drawer_menu_more_app"
             app:layout_constraintStart_toEndOf="@+id/iv_more_app"
             app:layout_constraintTop_toTopOf="@+id/iv_more_app" />
 
@@ -435,14 +434,14 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="@dimen/_10sdp"
+            android:layout_marginTop="@dimen/_3sdp"
             android:fontFamily="@font/poppins"
             android:text="@string/rate_us"
             android:textColor="@color/white"
             android:textSize="@dimen/_12ssp"
-            android:layout_marginTop="@dimen/_3sdp"
-            app:layout_constraintEnd_toEndOf="@id/drawer_menu_rate_us"
             android:textStyle="normal"
             app:layout_constraintBottom_toBottomOf="@+id/iv_rate_us"
+            app:layout_constraintEnd_toEndOf="@id/drawer_menu_rate_us"
             app:layout_constraintStart_toEndOf="@+id/iv_rate_us"
             app:layout_constraintTop_toTopOf="@+id/iv_rate_us" />
 
@@ -467,22 +466,21 @@
             android:tint="@color/white"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:srcCompat="@drawable/ic_feedback" />
-
+            app:layout_constraintTop_toTopOf="parent" />
+        <!--app:srcCompat="@drawable/ic_feedback"-->
         <com.google.android.material.textview.MaterialTextView
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="@dimen/_10sdp"
+            android:layout_marginBottom="@dimen/_3sdp"
             android:fontFamily="@font/poppins"
+            android:paddingTop="@dimen/_3sdp"
             android:text="@string/feedback"
             android:textColor="@color/white"
             android:textSize="@dimen/_12ssp"
-            android:paddingTop="@dimen/_3sdp"
-            android:layout_marginBottom="@dimen/_3sdp"
             android:textStyle="normal"
-            app:layout_constraintEnd_toEndOf="@id/drawer_menu_feedback"
             app:layout_constraintBottom_toBottomOf="@+id/iv_feedback"
+            app:layout_constraintEnd_toEndOf="@id/drawer_menu_feedback"
             app:layout_constraintStart_toEndOf="@+id/iv_feedback"
             app:layout_constraintTop_toTopOf="@+id/iv_feedback" />
 

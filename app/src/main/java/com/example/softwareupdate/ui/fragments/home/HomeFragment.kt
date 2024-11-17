@@ -15,7 +15,6 @@ import android.view.ViewGroup
 import androidx.activity.OnBackPressedCallback
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.content.ContextCompat
-import androidx.core.content.ContextCompat.getSystemService
 import androidx.core.view.GravityCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
@@ -42,6 +41,7 @@ import com.example.softwareupdate.utils.all_extension.showToast
 import com.example.softwareupdate.utils.all_extension.toast
 import com.example.softwareupdate.utils.calculateProgress
 import com.example.softwareupdate.utils.event.UpdateEvent
+import com.example.softwareupdate.utils.feedBackWithEmail
 import com.example.softwareupdate.utils.handleSystemUpdate
 import com.example.softwareupdate.utils.initDrawerClicks
 import com.example.softwareupdate.utils.initHomeItemsData
@@ -67,20 +67,17 @@ class HomeFragment : Fragment() {
     private var homeScreensItemsAdapter: HomeScreensItemsAdapter? = null
     private var isBtnStart = false
     private var exitDialog: AlertDialog? = null
-    private var rateUsDialog: RateUsDialog?=null
-    private var exitDialogNew:ExitDialog?=null
+    private var rateUsDialog: RateUsDialog? = null
+    private var exitDialogNew: ExitDialog? = null
 
     private var appUsageAccessDialog: AppUsageAccess? = null
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
         appUsageAccessDialog = AppUsageAccess(requireActivity(), callback = { accessGranted ->
             if (accessGranted) {
                 if (isUsageAccessGranted()) {
-                    // Permission already granted, proceed with functionality
-                    // TODO: Implement functionality here
                     activity?.showToast("Permission granted. Proceeding with functionality.")
                 } else {
                     // Permission not granted, guide user to settings
@@ -94,8 +91,8 @@ class HomeFragment : Fragment() {
         })
         sharedViewModel.invokePrivacyManagerAppsUseCase()
         sharedViewModelSystemApps.invokeAllSysAppsUseCase()
-        rateUsDialog = RateUsDialog(activity?:return)
-        exitDialogNew = ExitDialog(activity =activity?:return)
+        rateUsDialog = RateUsDialog(activity ?: return)
+        exitDialogNew = ExitDialog(activity = activity ?: return)
 
         homeScreensItemsAdapter = HomeScreensItemsAdapter(
             callback = { actionType: ActionType ->
@@ -160,7 +157,9 @@ class HomeFragment : Fragment() {
             setUpButtonSystemApplications()
             setUpStartButton()
             setUpHeaderLayout()
-            initDrawerClicks(colorString = "#F21100") { clickedViewIndex ->
+            initDrawerClicks(
+                colorString = "#F21100"
+            ) { clickedViewIndex ->
                 handleDrawerClick(clickedViewIndex)
             }
             setUpRecyclerView()
@@ -293,23 +292,16 @@ class HomeFragment : Fragment() {
             }.launchIn(viewLifecycleOwner.lifecycleScope)
     }
 
-//    0 -> this?.mainDrawerLayout?.closeDrawer(GravityCompat.START)
-//    1 -> navigateToDeviceInfo()
-//    2 -> activity?.privacyPolicyUrl()
-//    3 -> activity?.shareApp()
-//    4 -> activity?.moreApps()
-//    5 -> activity?.rateUs()
     private fun FragmentHomeBinding?.handleDrawerClick(clickedViewIndex: Int) {
         this?.mainDrawerLayout?.closeDrawer(GravityCompat.START)
         when (clickedViewIndex) {
             0 -> this?.mainDrawerLayout?.closeDrawer(GravityCompat.START)
-            // 1 -> navigateToLanguage()
-            1 -> activity?.privacyPolicyUrl()
-            2 -> activity?.shareApp()
-            3 -> activity?.moreApps()
-            4 -> activity?.rateUs()
-
-            // Add more cases as needed
+            1 -> navigateToDeviceInfo()
+            2 -> activity?.privacyPolicyUrl()
+            3 -> activity?.shareApp()
+            4 -> activity?.moreApps()
+            5 -> activity?.rateUs()
+            6 -> context?.feedBackWithEmail("Feedback", "Any Feedback", "shabirehtisham8@gmail.com")
         }
     }
 

@@ -43,6 +43,7 @@ import java.io.ByteArrayOutputStream
 import java.io.File
 import android.net.ConnectivityManager
 import android.net.NetworkCapabilities
+import android.widget.Toast
 import java.text.DecimalFormat
 import kotlin.math.log10
 import kotlin.math.pow
@@ -199,11 +200,12 @@ fun Context?.openPlayStoreForApp(packageName: String?) {
 }
 
 fun PackageManager?.getPackageInfoCompat(packageName: String, flags: Int = 0): PackageInfo? =
-    try {  if (SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
-        this?.getPackageInfo(packageName, PackageManager.PackageInfoFlags.of(flags.toLong()))
-    } else {
-        (this?.getPackageInfo(packageName, flags))
-    }
+    try {
+        if (SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+            this?.getPackageInfo(packageName, PackageManager.PackageInfoFlags.of(flags.toLong()))
+        } else {
+            (this?.getPackageInfo(packageName, flags))
+        }
     } catch (e: PackageManager.NameNotFoundException) {
         // Handle the case where the package is not found
         null
@@ -311,6 +313,7 @@ fun Context.openAppInPlayStore(packageName: String) {
         )
     }
 }
+
 fun formatSize(sizeInBytes: Long): String {
     if (sizeInBytes <= 0) return "0 B"
     val units = arrayOf("B", "KB", "MB", "GB", "TB")
@@ -318,7 +321,10 @@ fun formatSize(sizeInBytes: Long): String {
     return DecimalFormat("#,##0.#").format(sizeInBytes / 1024.0.pow(digitGroups.toDouble())) + " " + units[digitGroups]
 }
 
-fun FragmentHomeBinding?.initDrawerClicks(context:Context,colorString: String, clickCallback: (Int) -> Unit) {
+fun FragmentHomeBinding?.initDrawerClicks(
+    colorString: String,
+    clickCallback: (Int) -> Unit
+) {
     this@initDrawerClicks?.drawerLayout?.apply {
         this@initDrawerClicks.highlightDrawerMenuItem(
             clickedViewPosition = 0, colorString
@@ -335,42 +341,35 @@ fun FragmentHomeBinding?.initDrawerClicks(context:Context,colorString: String, c
                 clickedViewPosition = 1, colorString
             )
         }
-//        drawerMenuChangeTheme.setOnClickListener {
-//            clickCallback.invoke(2)
-//            this@initDrawerClicks.highlightDrawerMenuItem(
-//                clickedViewPosition = 2, colorString
-//            )
-//        }
         drawerMenuPrivacyPolicy.setOnClickListener {
-            clickCallback.invoke(1)
-            this@initDrawerClicks.highlightDrawerMenuItem(
-                clickedViewPosition = 1, colorString
-            )
-        }
-        drawerMenuShareApp.setOnClickListener {
             clickCallback.invoke(2)
             this@initDrawerClicks.highlightDrawerMenuItem(
                 clickedViewPosition = 2, colorString
             )
         }
-        drawerMenuMoreApp.setOnClickListener {
+        drawerMenuShareApp.setOnClickListener {
             clickCallback.invoke(3)
             this@initDrawerClicks.highlightDrawerMenuItem(
                 clickedViewPosition = 3, colorString
             )
         }
-        drawerMenuRateUs.setOnClickListener {
+        drawerMenuMoreApp.setOnClickListener {
             clickCallback.invoke(4)
             this@initDrawerClicks.highlightDrawerMenuItem(
                 clickedViewPosition = 4, colorString
             )
         }
-        drawerMenuFeedback.setOnClickListener {
+        drawerMenuRateUs.setOnClickListener {
             clickCallback.invoke(5)
             this@initDrawerClicks.highlightDrawerMenuItem(
                 clickedViewPosition = 5, colorString
             )
-            context.feedBackWithEmail("Feedback", "Any Feedback", "shabirehtisham8@gmail.com")
+        }
+        drawerMenuFeedback.setOnClickListener {
+            clickCallback.invoke(6)
+            this@initDrawerClicks.highlightDrawerMenuItem(
+                clickedViewPosition = 6, colorString
+            )
         }
     }
 }
@@ -381,7 +380,7 @@ fun FragmentHomeBinding?.highlightDrawerMenuItem(
     val drawerMenuItems = listOf(
         this@highlightDrawerMenuItem?.drawerLayout?.drawerMenuHome,
         this@highlightDrawerMenuItem?.drawerLayout?.drawerMenuDeviceInfo,
-      //  this@highlightDrawerMenuItem?.drawerLayout?.drawerMenuChangeTheme,
+        //  this@highlightDrawerMenuItem?.drawerLayout?.drawerMenuChangeTheme,
         this@highlightDrawerMenuItem?.drawerLayout?.drawerMenuPrivacyPolicy,
         this@highlightDrawerMenuItem?.drawerLayout?.drawerMenuShareApp,
         this@highlightDrawerMenuItem?.drawerLayout?.drawerMenuMoreApp,
@@ -401,17 +400,21 @@ fun FragmentHomeBinding?.highlightDrawerMenuItem(
     }
 }
 
-fun Context.feedBackWithEmail(title:String,message:String,emailId:String){
+fun Context.feedBackWithEmail(title: String, message: String, emailId: String) {
+    val emailIntent = Intent(Intent.ACTION_SENDTO).apply {
+        data = Uri.parse("mailto:")
+        putExtra(Intent.EXTRA_EMAIL, arrayOf(emailId))
+        putExtra(Intent.EXTRA_SUBJECT, title)
+        putExtra(Intent.EXTRA_TEXT, message)
+    }
     try {
-        val emailIntent = Intent(Intent.ACTION_SENDTO)
-        emailIntent.flags  = Intent.FLAG_ACTIVITY_CLEAR_TASK
-        emailIntent.data  = Uri.parse("mailto:")
-        emailIntent.putExtra(Intent.EXTRA_EMAIL, arrayOf(emailId))
-        emailIntent.putExtra(Intent.EXTRA_SUBJECT, title)
-        emailIntent.putExtra(Intent.EXTRA_TEXT, message)
-        this.startActivity(emailIntent)
-
-    }catch (e:java.lang.Exception){
+        if (emailIntent.resolveActivity(packageManager) != null) {
+            startActivity(emailIntent)
+        } else {
+            Toast.makeText(this, "No email client installed on the device", Toast.LENGTH_SHORT)
+                .show()
+        }
+    } catch (e: Exception) {
         e.printStackTrace()
     }
 }
