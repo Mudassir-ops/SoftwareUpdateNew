@@ -22,7 +22,6 @@
         android:layout_width="50dp"
         android:layout_height="0dp"
         android:padding="@dimen/_10sdp"
-        app:layout_constraintEnd_toStartOf="@id/txtDeviceInfo"
         app:layout_constraintBottom_toBottomOf="@id/viewTop"
         app:layout_constraintStart_toStartOf="@id/viewTop"
         app:layout_constraintTop_toTopOf="@id/viewTop"
@@ -39,7 +38,7 @@
         android:textSize="@dimen/_12sdp"
         app:layout_constraintBottom_toBottomOf="@id/viewTop"
         app:layout_constraintEnd_toEndOf="@id/viewTop"
-        app:layout_constraintStart_toEndOf="@id/icBack"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@id/viewTop" />
 
     <View

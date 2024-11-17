@@ -10,9 +10,9 @@ class MyCustomSelectAllCheckBox(context: Context?, attrs: AttributeSet?) : AppCo
 ) {
     override fun setChecked(t: Boolean) {
         if (t) {
-            setBackgroundResource(R.drawable.select_all)
+            setBackgroundResource(R.drawable.check_box)
         } else {
-            setBackgroundResource(R.drawable.deselect_all)
+            setBackgroundResource(R.drawable.uncheck_box)
         }
         super.setChecked(t)
     }

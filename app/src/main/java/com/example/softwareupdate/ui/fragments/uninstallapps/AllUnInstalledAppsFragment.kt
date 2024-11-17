@@ -188,7 +188,7 @@ class AllUnInstalledAppsFragment : Fragment() {
 
     private fun deleteNextApp(selectedApps: List<AllAppsEntity?>, index: Int) {
         if (index >= selectedApps.size) {
-            activity?.showToast("All selected apps have been uninstalled")
+           // activity?.showToast("All selected apps have been uninstalled")
             return
         }
         val app = selectedApps[index]

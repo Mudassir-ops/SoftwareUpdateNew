@@ -13,8 +13,7 @@
         app:layout_constraintEnd_toEndOf="@+id/header_layout"
         app:layout_constraintStart_toStartOf="@+id/header_layout"
         app:layout_constraintTop_toTopOf="@+id/header_layout"
-        android:tint="@color/white"
-        app:srcCompat="@drawable/system_update_h" />
+        app:srcCompat="@drawable/app_main_logo" />
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/header_layout"
@@ -185,6 +184,7 @@
             android:layout_width="@dimen/_20sdp"
             android:layout_height="@dimen/_20sdp"
             android:tint="@color/white"
+
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
@@ -199,6 +199,8 @@
             android:textColor="@color/white"
             android:textSize="@dimen/_12ssp"
             android:textStyle="normal"
+            android:layout_marginTop="@dimen/_3sdp"
+            app:layout_constraintEnd_toEndOf="@id/drawer_menu_home"
             app:layout_constraintBottom_toBottomOf="@+id/iv_home"
             app:layout_constraintStart_toEndOf="@+id/iv_home"
             app:layout_constraintTop_toTopOf="@+id/iv_home" />
@@ -318,6 +320,8 @@
             android:textColor="@color/white"
             android:textSize="@dimen/_12ssp"
             android:textStyle="normal"
+            android:layout_marginTop="@dimen/_3sdp"
+            app:layout_constraintEnd_toEndOf="@id/drawer_menu_privacy_policy"
             app:layout_constraintBottom_toBottomOf="@+id/iv_privacy_policy"
             app:layout_constraintStart_toEndOf="@+id/iv_privacy_policy"
             app:layout_constraintTop_toTopOf="@+id/iv_privacy_policy" />
@@ -354,6 +358,8 @@
             android:fontFamily="@font/poppins"
             android:text="@string/share_app"
             android:textColor="@color/white"
+            android:layout_marginTop="@dimen/_3sdp"
+            app:layout_constraintEnd_toEndOf="@id/drawer_menu_share_app"
             android:textSize="@dimen/_12ssp"
             android:textStyle="normal"
             app:layout_constraintBottom_toBottomOf="@+id/iv_share_app"
@@ -393,6 +399,8 @@
             android:text="@string/more_apps_ad"
             android:textColor="@color/white"
             android:textSize="@dimen/_12ssp"
+            android:layout_marginTop="@dimen/_3sdp"
+            app:layout_constraintEnd_toEndOf="@id/drawer_menu_more_app"
             android:textStyle="normal"
             app:layout_constraintBottom_toBottomOf="@+id/iv_more_app"
             app:layout_constraintStart_toEndOf="@+id/iv_more_app"
@@ -430,11 +438,53 @@
             android:fontFamily="@font/poppins"
             android:text="@string/rate_us"
             android:textColor="@color/white"
-            android:textSize="@dimen/_10ssp"
+            android:textSize="@dimen/_12ssp"
+            android:layout_marginTop="@dimen/_3sdp"
+            app:layout_constraintEnd_toEndOf="@id/drawer_menu_rate_us"
             android:textStyle="normal"
             app:layout_constraintBottom_toBottomOf="@+id/iv_rate_us"
             app:layout_constraintStart_toEndOf="@+id/iv_rate_us"
             app:layout_constraintTop_toTopOf="@+id/iv_rate_us" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/drawer_menu_feedback"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="@dimen/_10sdp"
+        android:layout_marginVertical="@dimen/_8sdp"
+        android:background="@drawable/drawer_item_shape"
+        android:backgroundTint="@color/main_gradient_start_color"
+        android:padding="@dimen/_6sdp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/drawer_menu_rate_us">
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/iv_feedback"
+            android:layout_width="@dimen/_20sdp"
+            android:layout_height="@dimen/_20sdp"
+            android:tint="@color/white"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/ic_feedback" />
+
+        <com.google.android.material.textview.MaterialTextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="@dimen/_10sdp"
+            android:fontFamily="@font/poppins"
+            android:text="@string/feedback"
+            android:textColor="@color/white"
+            android:textSize="@dimen/_12ssp"
+            android:paddingTop="@dimen/_3sdp"
+            android:layout_marginBottom="@dimen/_3sdp"
+            android:textStyle="normal"
+            app:layout_constraintEnd_toEndOf="@id/drawer_menu_feedback"
+            app:layout_constraintBottom_toBottomOf="@+id/iv_feedback"
+            app:layout_constraintStart_toEndOf="@+id/iv_feedback"
+            app:layout_constraintTop_toTopOf="@+id/iv_feedback" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
