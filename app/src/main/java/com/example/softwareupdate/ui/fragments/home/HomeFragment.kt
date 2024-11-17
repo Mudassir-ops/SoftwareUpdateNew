@@ -402,7 +402,7 @@ class HomeFragment : Fragment() {
         } else {
             binding?.tvBtnStart?.setGradientTextShader(
                 context ?: return,
-                progress.toString()
+                "$progress %"
             )
         }
     }
