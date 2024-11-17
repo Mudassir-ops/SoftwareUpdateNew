@@ -30,20 +30,6 @@ fun Context.showToast(message: String) {
     Toast.makeText(this, message, Toast.LENGTH_LONG).show()
 }
 
-
-
-fun Context.showGenericAlertDialog(message: String) {
-    AlertDialog.Builder(this).apply {
-        setMessage(message)
-        setPositiveButton("Ok") { dialog, _ ->
-            dialog.dismiss()
-        }
-    }.show()
-}
-
-
-
-
 private var toast: Toast? = null
 fun Activity.toast(message: String) {
     try {
@@ -60,10 +46,10 @@ fun Activity.toast(message: String) {
     }
 }
 
-var mLastClickTime:Long = 0
-fun  View.clickListener(action: (view:View)->Unit){
+var mLastClickTime: Long = 0
+fun View.clickListener(action: (view: View) -> Unit) {
     this.setOnClickListener {
-        if (SystemClock.elapsedRealtime() - mLastClickTime < 1000){
+        if (SystemClock.elapsedRealtime() - mLastClickTime < 1000) {
             return@setOnClickListener
         }
         mLastClickTime = SystemClock.elapsedRealtime()
@@ -71,60 +57,71 @@ fun  View.clickListener(action: (view:View)->Unit){
     }
 }
 
-fun Activity.shareApp(){
+fun Activity.shareApp() {
     try {
         val sendIntent = Intent(Intent.ACTION_SEND)
         sendIntent.type = "text/plain"
         sendIntent.putExtra(
-            Intent.EXTRA_SUBJECT,"ChargingAnimation")
+            Intent.EXTRA_SUBJECT, "ChargingAnimation"
+        )
         var shareMessage = "\n Let me recommend you this application\n\n"
         shareMessage = """
              ${shareMessage}https://play.google.com/store/apps/details?id= ${this.packageName}
         """.trimIndent()
-        sendIntent.putExtra(Intent.EXTRA_TEXT,shareMessage)
+        sendIntent.putExtra(Intent.EXTRA_TEXT, shareMessage)
         this.startActivity(Intent.createChooser(sendIntent, "Choose one"))
-    }catch (e:java.lang.Exception){
+    } catch (e: java.lang.Exception) {
         e.printStackTrace()
         this.toast("No Launcher")
     }
 }
 
-fun Activity.feedBackWithEmail(title:String,message:String,emailId:String){
+fun Activity.feedBackWithEmail(title: String, message: String, emailId: String) {
     try {
         val emailIntent = Intent(Intent.ACTION_SENDTO)
-        emailIntent.flags  = Intent.FLAG_ACTIVITY_CLEAR_TASK
-        emailIntent.data  = Uri.parse("mailto:")
+        emailIntent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK
+        emailIntent.data = Uri.parse("mailto:")
         emailIntent.putExtra(Intent.EXTRA_EMAIL, arrayOf(emailId))
         emailIntent.putExtra(Intent.EXTRA_SUBJECT, title)
         emailIntent.putExtra(Intent.EXTRA_TEXT, message)
         this.startActivity(emailIntent)
 
-    }catch (e:java.lang.Exception){
+    } catch (e: java.lang.Exception) {
         e.printStackTrace()
     }
 }
 
-fun Activity.privacyPolicyUrl(){
+fun Activity.privacyPolicyUrl() {
     try {
-        this.startActivity(Intent(Intent.ACTION_VIEW,Uri.parse(this.getString(R.string.privacy_policy_link))))
-    }catch (e:Exception){
+        this.startActivity(
+            Intent(
+                Intent.ACTION_VIEW,
+                Uri.parse(this.getString(R.string.privacy_policy_link))
+            )
+        )
+    } catch (e: Exception) {
         e.printStackTrace()
         toast(this.getString(R.string.no_launcher))
 
     }
 }
 
-fun Activity.moreApps(){
+fun Activity.moreApps() {
     try {
-        this.startActivity(Intent(Intent.ACTION_VIEW,Uri.parse(this.getString(R.string.more_app_link))))
-    }catch (e:Exception){
+        this.startActivity(
+            Intent(
+                Intent.ACTION_VIEW,
+                Uri.parse(this.getString(R.string.more_app_link))
+            )
+        )
+    } catch (e: Exception) {
         e.printStackTrace()
         toast(this.getString(R.string.no_launcher))
 
     }
 }
 
-fun Activity.rateUs(){
+fun Activity.rateUs() {
     try {
         this.startActivity(
             Intent(
@@ -133,13 +130,13 @@ fun Activity.rateUs(){
             )
         )
 
-    }catch (e:Exception){
+    } catch (e: Exception) {
         e.printStackTrace()
         toast("No Launcher")
     }
 }
 
-fun currentDateAndTime(context: Context,textView: TextView) {
+fun currentDateAndTime(context: Context, textView: TextView) {
     val currentDate = Date()
     val dateFormat = SimpleDateFormat("dd MMMM yyyy", Locale.getDefault())
     val timeFormat = SimpleDateFormat("hh:mm,a", Locale.getDefault())

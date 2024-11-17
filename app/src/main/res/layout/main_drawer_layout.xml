@@ -466,8 +466,9 @@
             android:tint="@color/white"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-        <!--app:srcCompat="@drawable/ic_feedback"-->
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/ic_feedback" />
+
         <com.google.android.material.textview.MaterialTextView
             android:layout_width="0dp"
             android:layout_height="wrap_content"

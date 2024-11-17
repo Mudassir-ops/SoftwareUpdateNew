@@ -150,7 +150,7 @@ class PrivacyManagerApplicationsRepositoryImpl @Inject constructor(
                 appPermissions.add(
                     AppPermissions(
                         permissionName = permission,
-                        permissionDetail = "Mudassir Satti",
+                        permissionDetail = "",
                         isDangerous = isDangerous
                     )
                 )

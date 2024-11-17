@@ -62,6 +62,8 @@ object NotificationModule {
             .setForegroundServiceBehavior(NotificationCompat.FOREGROUND_SERVICE_IMMEDIATE)
             .setContentIntent(pendingDefaultIntent)
             .setSound(null)
+            .setWhen(System.currentTimeMillis())
+            .setShowWhen(true)
     }
 
     /** Notification repository provider*/
