@@ -386,7 +386,6 @@ class HomeFragment : Fragment() {
             }
             .setCancelable(false)
             .create()
-
         exitDialog?.show()
         exitDialog?.getButton(AlertDialog.BUTTON_NEGATIVE)?.setTextColor(Color.RED)
 
