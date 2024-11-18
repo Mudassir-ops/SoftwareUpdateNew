@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "545796863569",
+    "project_id": "phone-update-741a7",
+    "storage_bucket": "phone-update-741a7.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:545796863569:android:90e7f35fcd50a17ef0ea70",
+        "android_client_info": {
+          "package_name": "ehtechapp.softwareupdate.supdate"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBKcBPeeoSUlnPxg9vQ_SadUaVqBShFdeg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
