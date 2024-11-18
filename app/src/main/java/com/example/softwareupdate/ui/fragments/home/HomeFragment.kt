@@ -68,6 +68,9 @@ class HomeFragment : Fragment() {
     private var exitDialogNew:ExitDialog?=null
 
 
+
+
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         sharedViewModel.invokePrivacyManagerAppsUseCase()
