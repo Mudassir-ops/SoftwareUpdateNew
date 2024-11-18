@@ -2,12 +2,14 @@ package com.example.softwareupdate.ui.fragments.home
 
 import android.Manifest
 import android.app.AlertDialog
+import android.app.AppOpsManager
 import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.graphics.Color
 import android.os.Build
 import android.os.Bundle
+import android.util.TypedValue
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -26,10 +28,15 @@ import com.example.softwareupdate.R
 import com.example.softwareupdate.RateUsDialog
 import com.example.softwareupdate.adapters.home.HomeScreensItemsAdapter
 import com.example.softwareupdate.databinding.FragmentHomeBinding
+import com.example.softwareupdate.dialog.AppUsageAccess
+import com.example.softwareupdate.dialog.ExitDialog
 import com.example.softwareupdate.service.CheckSoftwareService
+import com.example.softwareupdate.service.CheckSoftwareService.Companion.isRunning
 import com.example.softwareupdate.ui.fragments.appPrivacy.AppPrivacyRiskManagerViewModel
 import com.example.softwareupdate.ui.fragments.sysapps.AllSystemAppsViewModel
 import com.example.softwareupdate.utils.ActionType
+import com.example.softwareupdate.utils.AppConstants.IF_FIRST_TIME_OPEN_APP
+import com.example.softwareupdate.utils.all_extension.gone
 import com.example.softwareupdate.utils.all_extension.moreApps
 import com.example.softwareupdate.utils.all_extension.privacyPolicyUrl
 import com.example.softwareupdate.utils.all_extension.rateUs
@@ -38,12 +45,14 @@ import com.example.softwareupdate.utils.all_extension.showToast
 import com.example.softwareupdate.utils.all_extension.toast
 import com.example.softwareupdate.utils.calculateProgress
 import com.example.softwareupdate.utils.event.UpdateEvent
+import com.example.softwareupdate.utils.feedBackWithEmail
 import com.example.softwareupdate.utils.handleSystemUpdate
 import com.example.softwareupdate.utils.initDrawerClicks
 import com.example.softwareupdate.utils.initHomeItemsData
 import com.example.softwareupdate.utils.isInternetAvailable
 import com.example.softwareupdate.utils.isServiceRunning
 import com.example.softwareupdate.utils.setGradientTextShader
+import com.example.softwareupdate.utils.show
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
@@ -63,14 +72,28 @@ class HomeFragment : Fragment() {
     private var homeScreensItemsAdapter: HomeScreensItemsAdapter? = null
     private var isBtnStart = false
     private var exitDialog: AlertDialog? = null
-    private var rateUsDialog: RateUsDialog?=null
-
-
+    private var rateUsDialog: RateUsDialog? = null
+    private var exitDialogNew: ExitDialog? = null
+    private var appUsageAccessDialog: AppUsageAccess? = null
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        appUsageAccessDialog = AppUsageAccess(requireActivity(), callback = { accessGranted ->
+            if (accessGranted) {
+                if (isUsageAccessGranted()) {
+                    activity?.showToast("Permission granted. Proceeding with functionality.")
+                } else {
+                    // Permission not granted, guide user to settings
+                    activity?.showToast("Permission not granted. Please enable it in settings.")
+                }
+            } else {
+                // Handle case when user denies access
+                activity?.showToast("Permission denied.")
+            }
+        })
         sharedViewModel.invokePrivacyManagerAppsUseCase()
         sharedViewModelSystemApps.invokeAllSysAppsUseCase()
-        rateUsDialog = RateUsDialog(activity?:return)
+        rateUsDialog = RateUsDialog(activity ?: return)
+        exitDialogNew = ExitDialog(activity = activity ?: return)
 
         homeScreensItemsAdapter = HomeScreensItemsAdapter(
             callback = { actionType: ActionType ->
@@ -79,9 +102,15 @@ class HomeFragment : Fragment() {
                         findNavController().navigate(R.id.action_navigation_home_to_app_privacy_manager)
                     }
 
-                    ActionType.ACTION_APP_USAGE -> if (findNavController().currentDestination?.id == R.id.navigation_home) {
-                        // findNavController().navigate(R.id.action_navigation_home_to_navigation_updatedApps)
-                        findNavController().navigate(R.id.action_navigation_home_to_deviceInfoFragment)
+                    ActionType.ACTION_APP_USAGE -> {
+                        if (isUsageAccessGranted()) {
+                            if (findNavController().currentDestination?.id == R.id.navigation_home) {
+                                findNavController().navigate(R.id.action_navigation_home_to_navigation_updatedApps)
+                            }
+                        } else
+                            appUsageAccessDialog?.show()
+
+
                     }
 
                     ActionType.ACTION_APP_UNINSTALL -> if (findNavController().currentDestination?.id == R.id.navigation_home) {
@@ -95,6 +124,7 @@ class HomeFragment : Fragment() {
 
             }, dataList = context?.initHomeItemsData() ?: emptyList()
         )
+
     }
 
     override fun onCreateView(
@@ -109,9 +139,10 @@ class HomeFragment : Fragment() {
         val callback: OnBackPressedCallback = object :
             OnBackPressedCallback(true) {
             override fun handleOnBackPressed() {
-                if (!isDialogVisible()) {
-                    showExitDialog()
-                }
+//                if (!isDialogVisible()) {
+//                    showExitDialog()
+//                }
+                exitDialogNew?.show()
             }
         }
         activity?.onBackPressedDispatcher?.addCallback(this, callback)
@@ -121,18 +152,30 @@ class HomeFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         binding?.headerLayout?.btnPremium?.visibility = View.INVISIBLE
         binding?.apply {
-            btnViewMore.visibility = View.INVISIBLE
             setUpButtonViewMore()
             setUpButtonSystemUpdate()
             setUpButtonAndroidVersions()
             setUpButtonSystemApplications()
             setUpStartButton()
             setUpHeaderLayout()
-            initDrawerClicks(colorString = "#F21100") { clickedViewIndex ->
+            initDrawerClicks(
+                colorString = "#F21100"
+            ) { clickedViewIndex ->
                 handleDrawerClick(clickedViewIndex)
             }
             setUpRecyclerView()
+            viewModel.getAllUpdatedApp()
+            viewModel.getRowCount()
             observeAppCount()
+            if (IF_FIRST_TIME_OPEN_APP) {
+                binding?.tvBtnStart?.setGradientTextShader(
+                    context ?: return, resources.getString(R.string.tap_to_start_scanning)
+                )
+            } else {
+                binding?.tvBtnStart?.setGradientTextShader(
+                    context ?: return, resources.getString(R.string.start_nscan)
+                )
+            }
         }
     }
 
@@ -186,6 +229,10 @@ class HomeFragment : Fragment() {
     private fun FragmentHomeBinding.setUpStartButton() {
         btnStart.setOnClickListener {
             if (context?.isInternetAvailable() == true) {
+                if (isRunning) {
+                    activity?.toast("Already Checking")
+                    return@setOnClickListener
+                }
                 resetProgressBarAndSetText()
                 startCheckSoftwareService()
             } else {
@@ -221,6 +268,10 @@ class HomeFragment : Fragment() {
 
     private fun startCheckSoftwareService() {
         if (!isServiceRunning(context ?: return, CheckSoftwareService::class.java)) {
+            if (isRunning) {
+                activity?.toast("Already Checking")
+                return
+            }
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
                 if (ContextCompat.checkSelfPermission(
                         context ?: return, Manifest.permission.POST_NOTIFICATIONS
@@ -228,12 +279,14 @@ class HomeFragment : Fragment() {
                 ) {
                     requestPermissionLauncher.launch(Manifest.permission.POST_NOTIFICATIONS)
                 } else {
+                    binding?.btnViewMore?.gone()
                     ContextCompat.startForegroundService(
                         context ?: return,
                         Intent(context ?: return, CheckSoftwareService::class.java)
                     )
                 }
             } else {
+                binding?.btnViewMore?.gone()
                 ContextCompat.startForegroundService(
                     context ?: return,
                     Intent(context ?: return, CheckSoftwareService::class.java)
@@ -257,6 +310,9 @@ class HomeFragment : Fragment() {
     private fun FragmentHomeBinding?.observeAppCount() {
         viewModel.appCount.flowWithLifecycle(viewLifecycleOwner.lifecycle, Lifecycle.State.STARTED)
             .onEach { appCount ->
+                if (appCount > 0) {
+                    this?.btnViewMore?.show()
+                }
                 this?.tvUpdateAppCountStatic.let { it?.text = appCount.toString() }
             }.launchIn(viewLifecycleOwner.lifecycleScope)
     }
@@ -265,18 +321,18 @@ class HomeFragment : Fragment() {
         this?.mainDrawerLayout?.closeDrawer(GravityCompat.START)
         when (clickedViewIndex) {
             0 -> this?.mainDrawerLayout?.closeDrawer(GravityCompat.START)
-            1 -> activity?.privacyPolicyUrl()
-            2 -> activity?.shareApp()
-            3 -> activity?.moreApps()
-            4 -> rateUsDialog?.show()
-
-            // Add more cases as needed
+            1 -> navigateToDeviceInfo()
+            2 -> activity?.privacyPolicyUrl()
+            3 -> activity?.shareApp()
+            4 -> activity?.moreApps()
+            5 -> activity?.rateUs()
+            6 -> context?.feedBackWithEmail("Feedback", "Any Feedback", "shabirehtisham8@gmail.com")
         }
     }
 
-    private fun navigateToLanguage() {
+    private fun navigateToDeviceInfo() {
         if (findNavController().currentDestination?.id == R.id.navigation_home) {
-            findNavController().navigate(R.id.action_navigation_home_to_navigation_language)
+            findNavController().navigate(R.id.action_navigation_home_to_deviceInfoFragment)
         }
     }
 
@@ -305,8 +361,12 @@ class HomeFragment : Fragment() {
     @Subscribe(threadMode = ThreadMode.MAIN)
     fun onUpdateEvent(event: UpdateEvent) {
         if (!event.isAllAppCheckFinished) {
+            val textSizeInSp = resources.getDimension(com.intuit.ssp.R.dimen._8ssp)
+            binding?.tvBtnStart?.setTextSize(TypedValue.COMPLEX_UNIT_PX, textSizeInSp)
             handleAppCheckInProgress(event)
         } else {
+            val textSizeInSp = resources.getDimension(com.intuit.ssp.R.dimen._8ssp)
+            binding?.tvBtnStart?.setTextSize(TypedValue.COMPLEX_UNIT_PX, textSizeInSp)
             handleAllAppCheckFinished(event)
         }
     }
@@ -339,6 +399,11 @@ class HomeFragment : Fragment() {
                 resources.getString(R.string.scanned)
             )
             isBtnStart = true
+        } else {
+            binding?.tvBtnStart?.setGradientTextShader(
+                context ?: return,
+                "$progress %"
+            )
         }
     }
 
@@ -365,29 +430,16 @@ class HomeFragment : Fragment() {
         }
     }
 
-    private fun isDialogVisible(): Boolean {
-        val fragment = parentFragmentManager.findFragmentByTag("ExitDialog")
-        return fragment != null && fragment.isVisible
-    }
-
-    private fun showExitDialog() {
-        exitDialog = AlertDialog.Builder(requireContext())
-            .setTitle("Exit")
-            .setMessage("Are you sure you want to exit?")
-            .setPositiveButton("Exit") { dialog, _ ->
-                activity?.finishAffinity()
-                dialog.dismiss()
-            }
-            .setNegativeButton("Cancel") { dialog, _ ->
-                dialog.dismiss()
-            }
-            .setCancelable(false)
-            .create()
-
-        exitDialog?.show()
-        exitDialog?.getButton(AlertDialog.BUTTON_NEGATIVE)?.setTextColor(Color.RED)
-
-
+    private fun isUsageAccessGranted(): Boolean {
+        val appOpsManager = context?.getSystemService(Context.APP_OPS_SERVICE) as? AppOpsManager
+        val applicationInfo = context?.applicationInfo
+        val mode =
+            appOpsManager?.checkOpNoThrow(
+                AppOpsManager.OPSTR_GET_USAGE_STATS,
+                applicationInfo?.uid ?: return false,
+                context?.packageName ?: return false
+            )
+        return mode == AppOpsManager.MODE_ALLOWED
     }
 }
 

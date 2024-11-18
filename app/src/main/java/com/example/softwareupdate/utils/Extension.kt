@@ -43,6 +43,9 @@ import java.io.ByteArrayOutputStream
 import java.io.File
 import android.net.ConnectivityManager
 import android.net.NetworkCapabilities
+import android.util.TypedValue
+import android.view.Gravity
+import android.widget.Toast
 import java.text.DecimalFormat
 import kotlin.math.log10
 import kotlin.math.pow
@@ -198,16 +201,16 @@ fun Context?.openPlayStoreForApp(packageName: String?) {
     }
 }
 
-fun PackageManager?.getPackageInfoCompat(packageName: String, flags: Int = 0): PackageInfo? =
-    try {  if (SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+fun PackageManager?.getPackageInfoCompat(packageName: String, flags: Int = 0): PackageInfo? = try {
+    if (SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
         this?.getPackageInfo(packageName, PackageManager.PackageInfoFlags.of(flags.toLong()))
     } else {
         (this?.getPackageInfo(packageName, flags))
     }
-    } catch (e: PackageManager.NameNotFoundException) {
-        // Handle the case where the package is not found
-        null
-    }
+} catch (e: PackageManager.NameNotFoundException) {
+    // Handle the case where the package is not found
+    null
+}
 
 fun Context?.getPermissionInfo(permission: String): PermissionInfo? {
     try {
@@ -272,6 +275,14 @@ fun AppCompatTextView.setGradientTextShader(context: Context?, text: String) {
     )
     paint.shader = textShader
     this.text = text
+    textAlignment = View.TEXT_ALIGNMENT_INHERIT
+//    textSize = if (text == context?.getString(R.string.tap_to_start_scanning)) {
+//        val textSizeInSp = resources.getDimension(com.intuit.ssp.R.dimen._6ssp)
+//        textSizeInSp
+//    } else {
+//        val textSizeInSp = resources.getDimension(com.intuit.ssp.R.dimen._8ssp)
+//        textSizeInSp
+//    }
 }
 
 fun Drawable.drawableToByteArray(): ByteArray {
@@ -311,6 +322,7 @@ fun Context.openAppInPlayStore(packageName: String) {
         )
     }
 }
+
 fun formatSize(sizeInBytes: Long): String {
     if (sizeInBytes <= 0) return "0 B"
     val units = arrayOf("B", "KB", "MB", "GB", "TB")
@@ -318,7 +330,9 @@ fun formatSize(sizeInBytes: Long): String {
     return DecimalFormat("#,##0.#").format(sizeInBytes / 1024.0.pow(digitGroups.toDouble())) + " " + units[digitGroups]
 }
 
-fun FragmentHomeBinding?.initDrawerClicks(colorString: String, clickCallback: (Int) -> Unit) {
+fun FragmentHomeBinding?.initDrawerClicks(
+    colorString: String, clickCallback: (Int) -> Unit
+) {
     this@initDrawerClicks?.drawerLayout?.apply {
         this@initDrawerClicks.highlightDrawerMenuItem(
             clickedViewPosition = 0, colorString
@@ -329,28 +343,40 @@ fun FragmentHomeBinding?.initDrawerClicks(colorString: String, clickCallback: (I
                 clickedViewPosition = 0, colorString
             )
         }
-        drawerMenuPrivacyPolicy.setOnClickListener {
+        drawerMenuDeviceInfo.setOnClickListener {
             clickCallback.invoke(1)
             this@initDrawerClicks.highlightDrawerMenuItem(
                 clickedViewPosition = 1, colorString
             )
         }
-        drawerMenuShareApp.setOnClickListener {
+        drawerMenuPrivacyPolicy.setOnClickListener {
             clickCallback.invoke(2)
             this@initDrawerClicks.highlightDrawerMenuItem(
                 clickedViewPosition = 2, colorString
             )
         }
-        drawerMenuMoreApp.setOnClickListener {
+        drawerMenuShareApp.setOnClickListener {
             clickCallback.invoke(3)
             this@initDrawerClicks.highlightDrawerMenuItem(
                 clickedViewPosition = 3, colorString
             )
         }
-        drawerMenuRateUs.setOnClickListener {
+        drawerMenuMoreApp.setOnClickListener {
             clickCallback.invoke(4)
             this@initDrawerClicks.highlightDrawerMenuItem(
                 clickedViewPosition = 4, colorString
+            )
+        }
+        drawerMenuRateUs.setOnClickListener {
+            clickCallback.invoke(5)
+            this@initDrawerClicks.highlightDrawerMenuItem(
+                clickedViewPosition = 5, colorString
+            )
+        }
+        drawerMenuFeedback.setOnClickListener {
+            clickCallback.invoke(6)
+            this@initDrawerClicks.highlightDrawerMenuItem(
+                clickedViewPosition = 6, colorString
             )
         }
     }
@@ -361,12 +387,13 @@ fun FragmentHomeBinding?.highlightDrawerMenuItem(
 ) {
     val drawerMenuItems = listOf(
         this@highlightDrawerMenuItem?.drawerLayout?.drawerMenuHome,
-      //  this@highlightDrawerMenuItem?.drawerLayout?.drawerMenuLanguage,
-      //  this@highlightDrawerMenuItem?.drawerLayout?.drawerMenuChangeTheme,
+        this@highlightDrawerMenuItem?.drawerLayout?.drawerMenuDeviceInfo,
+        //  this@highlightDrawerMenuItem?.drawerLayout?.drawerMenuChangeTheme,
         this@highlightDrawerMenuItem?.drawerLayout?.drawerMenuPrivacyPolicy,
         this@highlightDrawerMenuItem?.drawerLayout?.drawerMenuShareApp,
         this@highlightDrawerMenuItem?.drawerLayout?.drawerMenuMoreApp,
-        this@highlightDrawerMenuItem?.drawerLayout?.drawerMenuRateUs
+        this@highlightDrawerMenuItem?.drawerLayout?.drawerMenuRateUs,
+        this@highlightDrawerMenuItem?.drawerLayout?.drawerMenuFeedback
     )
     for (menuItem in 0..drawerMenuItems.size.minus(1)) {
         if (menuItem == clickedViewPosition) {
@@ -378,6 +405,25 @@ fun FragmentHomeBinding?.highlightDrawerMenuItem(
                 it.backgroundTintList = ColorStateList.valueOf(Color.TRANSPARENT)
             }
         }
+    }
+}
+
+fun Context.feedBackWithEmail(title: String, message: String, emailId: String) {
+    val emailIntent = Intent(Intent.ACTION_SENDTO).apply {
+        data = Uri.parse("mailto:")
+        putExtra(Intent.EXTRA_EMAIL, arrayOf(emailId))
+        putExtra(Intent.EXTRA_SUBJECT, title)
+        putExtra(Intent.EXTRA_TEXT, message)
+    }
+    try {
+        if (emailIntent.resolveActivity(packageManager) != null) {
+            startActivity(emailIntent)
+        } else {
+            Toast.makeText(this, "No email client installed on the device", Toast.LENGTH_SHORT)
+                .show()
+        }
+    } catch (e: Exception) {
+        e.printStackTrace()
     }
 }
 
@@ -395,8 +441,8 @@ fun Context.initHomeItemsData(): MutableList<HomeItemsModel> {
     dataList.add(
         HomeItemsModel(
             itemImage = R.drawable.home_item_image_2,
-            lbOne = "Device Info",
-            lbTwo = " Information about your device"
+            lbOne = "App Usage",
+            lbTwo = getString(R.string.analyze_the_risk_state_of_each_app)
         )
     )
     dataList.add(
@@ -451,7 +497,7 @@ fun Context.isInternetAvailable(): Boolean {
 
     val network = connectivityManager.activeNetwork ?: return false
     val networkCapabilities = connectivityManager.getNetworkCapabilities(network) ?: return false
-    return networkCapabilities.hasTransport(NetworkCapabilities.TRANSPORT_WIFI) ||
-            networkCapabilities.hasTransport(NetworkCapabilities.TRANSPORT_CELLULAR) ||
-            networkCapabilities.hasTransport(NetworkCapabilities.TRANSPORT_ETHERNET)
+    return networkCapabilities.hasTransport(NetworkCapabilities.TRANSPORT_WIFI) || networkCapabilities.hasTransport(
+        NetworkCapabilities.TRANSPORT_CELLULAR
+    ) || networkCapabilities.hasTransport(NetworkCapabilities.TRANSPORT_ETHERNET)
 }

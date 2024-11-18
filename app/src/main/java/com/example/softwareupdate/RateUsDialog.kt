@@ -12,6 +12,7 @@ import android.view.LayoutInflater
 import android.view.WindowManager
 import android.widget.Toast
 import com.example.softwareupdate.databinding.RateusDialogBinding
+import com.example.softwareupdate.utils.feedBackWithEmail
 
 class RateUsDialog(
     activity: Activity
@@ -36,12 +37,12 @@ class RateUsDialog(
 
             btnRateUs.setOnClickListener {
                 val rating = ratingBar.rating.toInt()
-
                 if (rating <= 3) {
-                    // Show a toast message if rating is 3 or below
-                    Toast.makeText(context, "Thank you for your feedback", Toast.LENGTH_SHORT).show()
+                    context.feedBackWithEmail(
+                        title = "Feedback",
+                        message = "Any FeedBack",
+                        emailId = "shabirehtisham8@gmail.com")
                 } else if (rating >= 4) {
-                    // Redirect to Play Store if rating is 4 or 5
                     val intent = Intent(Intent.ACTION_VIEW, Uri.parse("market://details?id=${context.packageName}"))
                     context.startActivity(intent)
                 }

@@ -24,7 +24,6 @@ import com.example.softwareupdate.utils.parcelable
 
 class PrivacyManagerDetailFragment : Fragment() {
 
-    private val viewModel by viewModels<PrivacyManagerDetailViewModel>()
     private var _binding: FragmentPrivacyManagerDetailBinding? = null
     private val binding get() = _binding
     private var privacyManagerEntity: PrivacyManagerEntity? = null
@@ -114,7 +113,7 @@ class PrivacyManagerDetailFragment : Fragment() {
         return null // Return null if the app name doesn't match any package
     }
 
-    fun hasUsageStatsPermission(context: Context): Boolean {
+    private fun hasUsageStatsPermission(context: Context): Boolean {
         val appOps = context.getSystemService(Context.APP_OPS_SERVICE) as AppOpsManager
         val mode = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
             appOps.unsafeCheckOpNoThrow(AppOpsManager.OPSTR_GET_USAGE_STATS, android.os.Process.myUid(), context.packageName)
@@ -125,7 +124,7 @@ class PrivacyManagerDetailFragment : Fragment() {
     }
 
     // Function to request Usage Stats permission by directing user to settings
-    fun requestUsageStatsPermission(context: Context) {
+    private fun requestUsageStatsPermission(context: Context) {
         val intent = Intent(Settings.ACTION_USAGE_ACCESS_SETTINGS)
         intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
         context.startActivity(intent)
