@@ -353,6 +353,8 @@ class HomeFragment : Fragment() {
         isBtnStart = true
     }
 
+
+
     private val requestPermissionLauncher = registerForActivityResult(
         ActivityResultContracts.RequestPermission()
     ) { isGranted: Boolean ->
