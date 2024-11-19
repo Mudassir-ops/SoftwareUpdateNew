@@ -54,6 +54,7 @@ import com.example.softwareupdate.utils.isServiceRunning
 import com.example.softwareupdate.utils.setGradientTextShader
 import com.example.softwareupdate.utils.show
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.Dispatchers.IO
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
 import org.greenrobot.eventbus.EventBus
@@ -124,7 +125,6 @@ class HomeFragment : Fragment() {
 
             }, dataList = context?.initHomeItemsData() ?: emptyList()
         )
-
     }
 
     override fun onCreateView(
@@ -280,6 +280,7 @@ class HomeFragment : Fragment() {
                     requestPermissionLauncher.launch(Manifest.permission.POST_NOTIFICATIONS)
                 } else {
                     binding?.btnViewMore?.gone()
+                    viewModel.deleteAllTables(IO)
                     ContextCompat.startForegroundService(
                         context ?: return,
                         Intent(context ?: return, CheckSoftwareService::class.java)
@@ -287,6 +288,7 @@ class HomeFragment : Fragment() {
                 }
             } else {
                 binding?.btnViewMore?.gone()
+                viewModel.deleteAllTables(IO)
                 ContextCompat.startForegroundService(
                     context ?: return,
                     Intent(context ?: return, CheckSoftwareService::class.java)
@@ -417,7 +419,6 @@ class HomeFragment : Fragment() {
         binding?.btnViewMore?.visibility = View.VISIBLE
         isBtnStart = true
     }
-
 
 
     private val requestPermissionLauncher = registerForActivityResult(

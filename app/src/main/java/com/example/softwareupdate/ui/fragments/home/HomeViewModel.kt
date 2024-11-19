@@ -6,6 +6,7 @@ import androidx.lifecycle.viewModelScope
 import com.example.softwareupdate.data.PackageInfoEntity
 import com.example.softwareupdate.di.usecase.CheckAppUpdateUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.Dispatchers.IO
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -66,6 +67,11 @@ class HomeViewModel @Inject constructor(private val updateUseCase: CheckAppUpdat
                 Log.d("getRowCount", "getRowCount: ${updateUseCase.getRowCount()}")
                 _appCount.value = updateUseCase.getRowCount()
             }
+        }
+    }
+    fun deleteAllTables(ioDispatcher: CoroutineDispatcher?) {
+        viewModelScope.launch(ioDispatcher ?: return) {
+            updateUseCase.deleteAllTables()
         }
     }
 
