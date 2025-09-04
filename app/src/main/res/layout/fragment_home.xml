@@ -20,7 +20,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/_5sdp"
-            android:background="@drawable/home_header_bg"
+            android:background="@drawable/btn_shape_green"
             android:elevation="@dimen/_5sdp"
             android:padding="@dimen/_5sdp"
             app:layout_constraintEnd_toEndOf="parent"
@@ -40,7 +40,7 @@
                 app:layout_constraintTop_toTopOf="@+id/tv_update_appCount"
                 app:layout_constraintVertical_bias="0"
                 app:layout_constraintWidth_percent="0.35"
-                app:srcCompat="@drawable/btn_start_bg" />
+                app:srcCompat="@drawable/green_effect_transparent" />
 
             <ProgressBar
                 android:id="@+id/progressBar"
@@ -52,7 +52,7 @@
                 android:indeterminate="false"
                 android:max="100"
                 android:progress="100"
-                android:progressDrawable="@drawable/circular_progress_custom_shape"
+                android:progressDrawable="@drawable/circular_progress_custom_shape_green"
                 android:secondaryProgress="0"
                 app:layout_constraintBottom_toBottomOf="@+id/btn_start"
                 app:layout_constraintEnd_toEndOf="@+id/btn_start"
@@ -153,7 +153,7 @@
             android:layout_width="0dp"
             android:layout_height="60dp"
             android:layout_marginVertical="@dimen/_10sdp"
-            android:background="@drawable/round_storke_gradient_extra_corner"
+            android:background="@drawable/round_stroke_green_effect"
             android:elevation="@dimen/_5sdp"
             app:layout_constraintEnd_toStartOf="@+id/btn_android_versions"
             app:layout_constraintStart_toStartOf="@+id/label_feature"
@@ -190,7 +190,7 @@
             android:layout_width="0dp"
             android:layout_height="60dp"
             android:layout_marginHorizontal="@dimen/_10sdp"
-            android:background="@drawable/round_storke_gradient_extra_corner"
+            android:background="@drawable/round_stroke_green_effect"
             android:elevation="@dimen/_5sdp"
             app:layout_constraintBottom_toBottomOf="@id/btn_system_update"
             app:layout_constraintEnd_toStartOf="@+id/btn_system_applications"
@@ -214,7 +214,7 @@
             android:layout_width="0dp"
             android:layout_height="60dp"
             android:layout_marginEnd="@dimen/_5sdp"
-            android:background="@drawable/round_storke_gradient_extra_corner"
+            android:background="@drawable/round_stroke_green_effect"
             android:elevation="@dimen/_5sdp"
             app:layout_constraintBottom_toBottomOf="@id/btn_android_versions"
             app:layout_constraintEnd_toEndOf="@+id/home_header_layout"

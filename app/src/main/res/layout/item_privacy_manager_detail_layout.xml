@@ -13,7 +13,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="@dimen/_5sdp"
-        android:background="@drawable/round_gradient_shape"
+        android:background="@drawable/round_stroke_green_effect"
         android:padding="@dimen/_5sdp">
 
         <com.google.android.material.textview.MaterialTextView

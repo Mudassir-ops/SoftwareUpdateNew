@@ -5,13 +5,14 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:padding="20dp"
     android:layout_margin="@dimen/_10sdp"
-    android:background="@drawable/home_header_bg">
+    android:background="@drawable/round_stroke_green_effect">
 
     <TextView
         android:id="@+id/title"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:text="Exit"
+
         app:layout_constraintBottom_toTopOf="@id/message"
         android:textSize="@dimen/_18sdp"
         android:textColor="@color/white"

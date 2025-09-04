@@ -13,7 +13,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="@dimen/_10sdp"
-        android:background="@drawable/round_storke_gradient_extra_corner"
+        android:background="@drawable/round_stroke_green_effect"
         android:elevation="@dimen/_5sdp">
 
         <androidx.appcompat.widget.AppCompatImageView
@@ -60,7 +60,7 @@
             android:layout_height="@dimen/_30sdp"
             android:layout_marginHorizontal="@dimen/_20sdp"
             android:layout_marginVertical="@dimen/_10sdp"
-            android:background="@drawable/btn_shape_gradient"
+            android:background="@drawable/btn_shape_green"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"

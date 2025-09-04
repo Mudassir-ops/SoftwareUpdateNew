@@ -265,12 +265,12 @@ fun AppCompatTextView.setGradientTextShader(context: Context?, text: String) {
     val width = paint.measureText(text)
     val textShader: Shader = LinearGradient(
         0f, 0f, width, textSize, intArrayOf(
-            ContextCompat.getColor(context ?: return, R.color.shader_first_color),
-            ContextCompat.getColor(context, R.color.shader_first_color),
-            ContextCompat.getColor(context, R.color.shader_second_color),
-            ContextCompat.getColor(context, R.color.shader_first_color),
-            ContextCompat.getColor(context, R.color.shader_second_color),
-            ContextCompat.getColor(context, R.color.shader_first_color)
+            ContextCompat.getColor(context ?: return, R.color.white),
+            ContextCompat.getColor(context, R.color.white),
+            ContextCompat.getColor(context, R.color.white),
+            ContextCompat.getColor(context, R.color.white),
+            ContextCompat.getColor(context, R.color.white),
+            ContextCompat.getColor(context, R.color.white)
         ), null, Shader.TileMode.REPEAT
     )
     paint.shader = textShader

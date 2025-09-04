@@ -77,8 +77,8 @@ dependencies {
     /** multidex dependency */
     implementation("androidx.multidex:multidex:$multidexVersion")
     /** hilt dependencies */
-    implementation("com.google.dagger:hilt-android:2.44")
-    kapt("com.google.dagger:hilt-android-compiler:2.44")
+    implementation("com.google.dagger:hilt-android:2.52")
+    kapt("com.google.dagger:hilt-android-compiler:2.52")
     /** dimens dependencies */
     implementation("com.intuit.ssp:ssp-android:1.0.5")
     implementation("com.intuit.sdp:sdp-android:1.0.5")

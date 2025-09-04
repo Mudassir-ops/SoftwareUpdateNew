@@ -13,7 +13,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="@dimen/_5sdp"
-        android:background="@drawable/round_gradient_shape"
+        android:background="@drawable/round_stroke_green_effect"
         android:padding="@dimen/_5sdp">
 
         <androidx.appcompat.widget.AppCompatImageView
@@ -72,7 +72,7 @@
             android:layout_width="@dimen/_65sdp"
             android:layout_height="wrap_content"
             android:layout_marginEnd="@dimen/_5sdp"
-            android:background="@drawable/check_gradient_shape"
+            android:background="@drawable/check_gradient_shape_green"
             app:layout_constraintBottom_toBottomOf="@+id/tv_version"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="@+id/tv_version_title">

@@ -26,5 +26,8 @@
     <color name="end_color">#29DEE5</color>
     <color name="app_color">#2F2759</color>
     <color name="app_color_light">#5C5676</color>
+    <color name="green_color_new">#007723</color>
+    <color name="green_color_dark">#061407</color>
+    <color name="green_color_">#061B0C</color>
 
 </resources>

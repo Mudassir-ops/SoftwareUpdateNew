@@ -22,7 +22,7 @@
             android:id="@+id/language_selection_layout"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:background="@drawable/round_storke_gradient_extra_corner"
+            android:background="@drawable/round_stroke_green_effect"
             app:layout_constraintBottom_toTopOf="@+id/tv_home_one"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
